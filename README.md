@@ -94,4 +94,161 @@
   </script>
 </head>
 <body>
-  ... (rest of the file unchanged) ...
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="avatar" aria-hidden="true"></div>
+        <div>
+          <h1>Tenho Saavedra</h1>
+          <div class="tagline">Project Manager · Delivery, Agile/DevOps, AI/ML initiatives</div>
+        </div>
+      </div>
+      <div class="toolbar">
+        <button class="btn" id="themeBtn" title="Toggle dark/light">🌓 Theme</button>
+        <a class="btn" href="#" id="downloadPdf">⬇️ PDF</a>
+        <a class="btn" href="mailto:tenho.saavedra@ecomond.com">✉️ Contact</a>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>Summary</h2>
+        <div class="hero">
+          <div>
+            <p>Project manager with a track record of shipping complex, cross-functional work. I make scope legible, unblock teams, and convert ambiguity into delivery—especially where data and ML touch real products.</p>
+            <div class="chips" aria-label="Impact highlights">
+              <span class="chip">↑ On-time delivery +23%</span>
+              <span class="chip">↓ Cycle time −18%</span>
+              <span class="chip">↺ Incident MTTR −35%</span>
+              <span class="chip">⚙️ CI/CD adoption across 5 teams</span>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>Focus areas</strong>
+            <ul>
+              <li>Agile facilitation (Scrum/Kanban), outcome-driven roadmaps</li>
+              <li>DevOps practices: CI/CD, observability, incident response</li>
+              <li>AI/ML project orchestration: data readiness, evaluation gates</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Core Skills</h2>
+        <div class="skills">
+          <div class="skill">
+            <span>Stakeholder Management</span>
+            <meter min="0" max="5" value="5">5/5</meter>
+          </div>
+          <div class="skill">
+            <span>Agile Delivery</span>
+            <meter min="0" max="5" value="5">5/5</meter>
+          </div>
+          <div class="skill">
+            <span>Risk & Dependency Mgmt</span>
+            <meter min="0" max="5" value="4">4/5</meter>
+          </div>
+          <div class="skill">
+            <span>DevOps / CI-CD</span>
+            <meter min="0" max="5" value="4">4/5</meter>
+          </div>
+          <div class="skill">
+            <span>AI/ML Delivery</span>
+            <meter min="0" max="5" value="4">4/5</meter>
+          </div>
+          <div class="skill">
+            <span>Budget & Forecasting</span>
+            <meter min="0" max="5" value="4">4/5</meter>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Selected Projects</h2>
+        <ul class="timeline">
+          <li>
+            <div class="dot" aria-hidden="true"></div>
+            <div class="card">
+              <strong>Data Platform Modernization</strong>
+              <div class="meta">2024–2025 · PM · Ecomond</div>
+              <p>Led migration to a modular data platform. Coordinated 4 teams across ingestion, modeling, and observability. Introduced a productized backlog and evaluation gates for ML features.</p>
+              <div class="chips">
+                <span class="chip">Cost −22%</span>
+                <span class="chip">Freshness +3×</span>
+                <span class="chip">SLAs 99.9%</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="dot" aria-hidden="true"></div>
+            <div class="card">
+              <strong>Incident Response Overhaul</strong>
+              <div class="meta">2023–2024 · PM</div>
+              <p>Rolled out unified on-call, playbooks, and postmortem discipline. Established error budgets and dashboards.</p>
+              <div class="chips">
+                <span class="chip">MTTR −35%</span>
+                <span class="chip">Sev1 count −40%</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="dot" aria-hidden="true"></div>
+            <div class="card">
+              <strong>ML-Powered Forecasting MVP</strong>
+              <div class="meta">2022–2023 · PM</div>
+              <p>Launched a forecasting MVP with offline/online evaluation. Drove alignment across DS/Eng/Product, created risks register and decision logs.</p>
+              <div class="chips">
+                <span class="chip">MAPE −12%</span>
+                <span class="chip">Time-to-insight −50%</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Credentials</h2>
+        <ul>
+          <li>Certified Scrum Master (CSM), 2023</li>
+          <li>ITIL Foundation, 2022</li>
+          <li>Google Project Management Cert, 2021</li>
+        </ul>
+        <h2>Contact</h2>
+        <p><a href="mailto:tenho.saavedra@ecomond.com">tenho.saavedra@ecomond.com</a> · <a href="https://github.com/<your-username>">github.com/&lt;your-username&gt;</a> · <a href="https://www.linkedin.com/in/<your-handle>">LinkedIn</a></p>
+      </section>
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> Tenho Saavedra</div>
+      <div class="links">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#">Back to top ↑</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle: remember preference
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    const stored = localStorage.getItem('theme');
+    if(stored){ root.setAttribute('data-theme', stored); }
+    themeBtn.addEventListener('click', () => {
+      const now = root.getAttribute('data-theme') === 'light' ? '' : 'light';
+      if(now) root.setAttribute('data-theme', now); else root.removeAttribute('data-theme');
+      localStorage.setItem('theme', now);
+    });
+
+    // PDF download: triggers print dialog for clean export
+    document.getElementById('downloadPdf').addEventListener('click', (e)=>{
+      e.preventDefault();
+      window.print();
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
