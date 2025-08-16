@@ -106,7 +106,7 @@
       <div class="toolbar">
         <button class="btn" id="themeBtn" title="Toggle dark/light">🌓 Theme</button>
         <a class="btn" href="#" id="downloadPdf">⬇️ PDF</a>
-        <a class="btn" href="mailto:tenho.saavedra@ecomond.com">✉️ Contact</a>
+        <a class="btn" href="mailto:tenho.saavedra@">✉️ Contact</a>
       </div>
     </header>
 
