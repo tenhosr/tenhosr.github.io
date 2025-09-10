@@ -209,8 +209,8 @@
             <div class="card">
               <h3>Elsewhere</h3>
               <ul>
-                <li>LinkedIn — <a href="#" aria-disabled="true" onclick="alert('Replace with your profile URL'); return false;">Add your link</a></li>
-                <li>GitHub — <a href="#" aria-disabled="true" onclick="alert('Replace with your profile URL'); return false;">Add your link</a></li>
+                <li>LinkedIn — <a href="#" aria-disabled="true" onclick="alert('Tenho Saavedra'); return false;">https://www.linkedin.com/in/tenhosaavedra/</a></li>
+                <!-- <li>GitHub — <a href="#" aria-disabled="true" onclick="alert('Replace with your profile URL'); return false;">Add your link</a></li> -->
               </ul>
             </div>
           </div>
@@ -218,7 +218,7 @@
       </div>
     </section>
 
-    <p class="footer">Designed with affection for Snow Leopard (2010). No pixels were harmed.</p>
+    
   </main>
 
   <!-- Dock -->
