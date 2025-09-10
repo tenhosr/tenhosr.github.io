@@ -26,7 +26,7 @@
       background:
         radial-gradient(1200px 600px at 70% -10%, rgba(90,120,255,.15), transparent 60%),
         radial-gradient(1200px 700px at -10% -20%, rgba(0,0,0,.2), transparent 60%),
-        #2b3a55 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><defs><pattern id="p" width="60" height="60" patternUnits="userSpaceOnUse"><g opacity="0.08"><path d="M0 59.5h60v1H0z" fill="%23fff"/><path d="M59.5 0v60h1V0z" fill="%23fff"/></g></pattern></defs><rect fill="%231a2538" width="100%" height="100%"/><rect fill="url(%23p)" width="100%" height="100%"/></svg>') fixed;
+        #2b3a55 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><defs><pattern id="p" width="60" height="60" patternUnits="userSpaceOnUse"><g opacity="0.08"><path d="M0 59.5h60v1H0z" fill="%23fff"/><path d="M59.5 0v60V0z" fill="%23fff"/></g></pattern></defs><rect fill="%231a2538" width="100%" height="100%"/><rect fill="url(%23p)" width="100%" height="100%"/></svg>') fixed;
       background-size: cover;
     }
 
@@ -152,8 +152,8 @@
           <div class="side-h">Places</div>
           <nav>
             <ul class="nav">
-              <li><a href="#about" class="active" data-section="about"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 100 14 7 7 0 000-14zm0 16c-4.418 0-8 2.239-8 5 0 1.104.896 1 2 1h12c1.104 0 2 .104 2-1 0-2.761-3.582-5-8-5z"/></svg> About Me</a></li>
-              <li><a href="#work" data-section="work"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 2h6a2 2 0 012 2v2h3a2 2 0 012 2v2H2V8a2 2 0 012-2h3V4a2 2 0 012-2zm8 6H7V4h10v4zM2 12h22v8a2 2 0 01-2 2H4a2 2 0 01-2-2v-8z"/></svg> Projects</a></li>
+              <li><a href="#about" class="active" data-section="about"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 100 14 7 7 0 000-14zm0 16c-4.418 0-8 2.239-8 5 0 1.104.896 1 2 12c1.104 0 2 .104 2-1 0-2.761-3.582-5-8-5z"/></svg> About Me</a></li>
+              <li><a href="#work" data-section="work"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 2h6a2 2 0 012 2v2h3a2 2 0 012 2v2H2V8a2 2 0 012-2h3V4a2 2 0 012-2zm8 6H7V40v4zM2 12h22v8a2 2 0 01-2 2H4a2 2 0 01-2-2v-8z"/></svg> Projects</a></li>
               <li><a href="#contact" data-section="contact"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm-9 9a9 9 0 1118 0H3z"/></svg> Contact</a></li>
             </ul>
           </nav>
@@ -166,10 +166,10 @@
             <div class="card">
               <h3>Snapshot</h3>
               <ul>
-                <li>🏷️ Role: Project Manager</li>
+                <li>🏷️ Role: Project Manager / Business development / Product and service development</li>
                 <li>🧭 Strengths: scope shaping, risk tracking, stakeholder comms, data‑informed prioritization</li>
-                <li>🛠 Tooling: Jira, Confluence, Notion, GitHub Projects, Miro</li>
-                <li>🤖 Interests: Agile, DevOps, AI/ML in delivery</li>
+                <li>🛠 Tooling: Atlassian Suite & homebrew</li>
+                <li>🤖 Interests: Products, business and Scuba</li>
               </ul>
             </div>
             <div class="card">
@@ -178,7 +178,7 @@
               <a class="btn" href="assets/Tenho_Saavedra_CV.pdf" download>
                 <!-- simple floppy icon -->
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 7v12a3 3 0 01-3 3H7a3 3 0 01-3-3V5a3 3 0 013-3h9l4 5zM7 4v6h8V4H7zm5 12H7v3h5v-3z"/></svg>
-                Download CV (PDF)
+                Download my CV (PDF)
               </a>
             </div>
           </div>
@@ -213,7 +213,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2">
       <path d="M19 0h-14c-2.76 0-5 2.24-5 
                5v14c0 2.76 2.24 5 5 
-               5h14c2.76 0 5-2.24 
+               54c2.76 0 5-2.24 
                5-5v-14c0-2.76-2.24-5-5-5zm-11 
                19h-3v-10h3v10zm-1.5-11.29c-.96 
                0-1.75-.79-1.75-1.75s.79-1.75 
@@ -241,7 +241,7 @@
   <!-- Dock -->
   <nav class="dock" aria-label="Dock">
     <a href="#about" data-section="about" title="About"><span>About</span><img alt="About icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23dbe5ff'/><path d='M12 12a5 5 0 100-10 5 5 0 000 10zm-9 9a9 9 0 1118 0H3z' fill='%23224477'/></svg>" /></a>
-    <a href="#work" data-section="work" title="Work"><span>Work</span><img alt="Work icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23e7f7ef'/><path d='M9 2h6a2 2 0 012 2v2h3a2 2 0 012 2v2H2V8a2 2 0 012-2h3V4a2 2 0 012-2zm8 6H7V4h10v4zM2 12h22v8a2 2 0 01-2 2H4a2 2 0 01-2-2v-8z' fill='%231b6f42'/></svg>" /></a>
+    <a href="#work" data-section="work" title="Work"><span>Work</span><img alt="Work icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23e7f7ef'/><path d='M9 2h6a2 2 0 012 2v2h3a2 2 0 012 2v2H2V8a2 2 0 012-2h3V4a2 2 0 012-2zm8 6H7V40v4zM2 12h22v8a2 2 0 01-2 2H4a2 2 0 01-2-2v-8z' fill='%231b6f42'/></svg>" /></a>
     <a href="#contact" data-section="contact" title="Contact"><span>Contact</span><img alt="Contact icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23ffe9e9'/><path d='M12 12a5 5 0 100-10 5 5 0 000 10zm-9 9a9 9 0 1118 0H3z' fill='%239c2a2a'/></svg>" /></a>
     <a href="#" title="Download CV" onclick="document.querySelector('[href^=\'assets/\']').click(); return false;">
       <span>Download CV</span>
