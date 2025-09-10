@@ -202,12 +202,12 @@
           <div class="view" data-view="contact" hidden>
             <h2 class="title">Contact</h2>
             <div class="card">
-              <p>Best way to reach me: <a href="mailto:tenhosaavedra (@) gmail.com">tenhosaavedra (@) gmail.com</a></p>
+              <p>Best way to reach me: <a href="mailto:tenhosaavedra@gmail.com">tenhosaavedra (@) gmail.com</a></p>
               <p class="meta">I’m open to interesting collaborations and hard problems with friendly people.</p>
             </div>
             <div class="card">
               <h3>Elsewhere</h3>
-              <ul>
+              <!-- <ul> -->
                 <li>
   <a href="https://www.linkedin.com/in/tenhosaavedra/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2">
