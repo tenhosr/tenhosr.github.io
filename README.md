@@ -207,8 +207,8 @@
             </div>
             <div class="card">
               <h3>Elsewhere</h3>
-              <!-- <ul> -->
-                <li>
+               <ul>
+                
   <a href="https://www.linkedin.com/in/tenhosaavedra/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2">
       <path d="M19 0h-14c-2.76 0-5 2.24-5 
@@ -226,7 +226,7 @@
     </svg>
     <span style="color:#0A66C2; font-weight:600;">LinkedIn</span>
   </a>
-</li>
+
                 <!-- <li>GitHub — <a href="#" aria-disabled="true" onclick="alert('Replace with your profile URL'); return false;">Add your link</a></li> -->
               </ul>
             </div>
