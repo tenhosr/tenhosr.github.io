@@ -1,9 +1,8 @@
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Personal website of Tenho Saavedra — project manager." />
+  <meta name="description" content="Personal website of Tenho Saavedra" />
   <style>
     /* === Mac OS X Snow Leopard (2010) vibes === */
     :root{
@@ -187,8 +186,8 @@
           <div class="view" data-view="work" hidden>
             <h2 class="title">Selected Projects</h2>
             <div class="card">
-              <h3>Delivery Operating Model Refresh</h3>
-              <p>Redesigned team ceremonies and definition of done across three squads, improving lead time by 22% over two quarters.</p>
+              <h3>Project manager at Ecomond</h3>
+              <p>Building and delivering projects together with our team in the Nordics and Latin America.</p>
               <p class="meta">Methods: value stream mapping, WIP limits, Monte Carlo forecasting.</p>
             </div>
             <div class="card">
@@ -202,7 +201,7 @@
           <div class="view" data-view="contact" hidden>
             <h2 class="title">Contact</h2>
             <div class="card">
-              <p>Best way to reach me: <a href="mailto:tenhosaavedra@gmail.com">tenhosaavedra (@) gmail.com</a></p>
+              <p>Best way to reach me: <a href="mailto:tenhosaavedra@gmail.com">tenhosaavedra(@)gmail.com</a></p>
               <p class="meta">I’m open to interesting collaborations and hard problems with friendly people.</p>
             </div>
             <div class="card">
