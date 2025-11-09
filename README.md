@@ -1,283 +1,600 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <title>María & Juan - Boda</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Personal website of Tenho Saavedra" />
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* === Mac OS X Snow Leopard (2010) vibes === */
-    :root{
-      --window-bg: #f6f6f8;
-      --chrome:#e9e9ee;
-      --chrome-dark:#d4d4db;
-      --text:#222;
-      --muted:#667;
-      --blue:#3a8bff;
-      --green:#2aca44;
-      --yellow:#f5c02a;
-      --red:#ff5f57;
-      --link:#0071e3;
+    html {
+      scroll-behavior: smooth;
     }
-    html,body{height:100%;}
-    body{
-      margin:0; 
-      font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 70% -10%, rgba(90,120,255,.15), transparent 60%),
-        radial-gradient(1200px 700px at -10% -20%, rgba(0,0,0,.2), transparent 60%),
-        #2b3a55 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><defs><pattern id="p" width="60" height="60" patternUnits="userSpaceOnUse"><g opacity="0.08"><path d="M0 59.5h60v1H0z" fill="%23fff"/><path d="M59.5 0v60V0z" fill="%23fff"/></g></pattern></defs><rect fill="%231a2538" width="100%" height="100%"/><rect fill="url(%23p)" width="100%" height="100%"/></svg>') fixed;
-      background-size: cover;
-    }
-
-    .menu-bar{
-      position:fixed;top:0;left:0;right:0;height:24px;z-index:20;
-      display:flex;align-items:center;gap:14px;padding:0 10px;
-      color:#fff;backdrop-filter:saturate(1.2) blur(10px);
-      background:linear-gradient(#3b4c6b,#2a3a59);
-      box-shadow:0 1px 0 rgba(255,255,255,.2), 0 1px 16px rgba(0,0,0,.25);
-      font-size:12px;
-      user-select:none;
-    }
-    .menu-apple{font-weight:700;font-size:14px;margin-right:6px}
-    .menu-item{opacity:.9}
-
-    .desktop{min-height:100%; padding:48px 24px 120px; box-sizing:border-box;}
-
-    .window{
-      width:min(980px, 96vw); margin:32px auto; border-radius:10px; overflow:hidden;
-      background:var(--window-bg); box-shadow:0 30px 70px rgba(0,0,0,.35), 0 2px 0 rgba(255,255,255,.3) inset;
-      border:1px solid rgba(0,0,0,.12);
-    }
-    .traffic{
-      height:24px; display:flex; align-items:center; gap:8px; padding:10px; background:linear-gradient(#fdfdff,#e9e9ee);
-      border-bottom:1px solid rgba(0,0,0,.08);
-    }
-    .dot{width:12px;height:12px;border-radius:50%; box-shadow:0 1px 0 rgba(255,255,255,.8) inset, 0 0 0 1px rgba(0,0,0,.08);
-      position:relative}
-    .dot.red{background:var(--red)}
-    .dot.yellow{background:var(--yellow)}
-    .dot.green{background:var(--green)}
-
-    .toolbar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:linear-gradient(#f6f6f8,#e4e4ea);border-bottom:1px solid rgba(0,0,0,.06)}
-    .seg{display:inline-flex;border-radius:6px;overflow:hidden;border:1px solid var(--chrome-dark);box-shadow:0 1px 0 #fff inset}
-    .seg button{background:linear-gradient(#fff,#eaeaef);border:0;padding:6px 10px;font-size:12px}
-    .seg button+button{border-left:1px solid var(--chrome-dark)}
-
-    .content{display:grid;grid-template-columns:220px 1fr;min-height:420px}
-    .sidebar{background:linear-gradient(#f5f5f9,#ececf2);border-right:1px solid rgba(0,0,0,.08);padding:12px}
-    .side-h{font-size:11px;color:#556;letter-spacing:.4px;margin:14px 8px 6px;text-transform:uppercase}
-    .nav{list-style:none;padding:0;margin:0}
-    .nav a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;color:#223;text-decoration:none;font-size:14px}
-    .nav a:hover{background:#e9eefc}
-    .nav a.active{background:#dce9ff;border:1px solid #c7dafc}
-    .nav .icon{width:16px;height:16px;opacity:.9}
-
-    .main{padding:18px 22px 28px}
-    .title{font-size:20px;font-weight:600;margin:6px 0 12px}
-    .lead{color:var(--muted);line-height:1.5;margin:0 0 18px;font-size:15px}
-
-    .card{
-      border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:16px; background:#fff;
-      box-shadow:0 1px 0 rgba(255,255,255,.8) inset, 0 14px 30px rgba(0,0,0,.08);
-      margin:12px 0;
-    }
-    .card h3{margin:0 0 8px;font-size:16px}
-    .meta{color:#555; font-size:13px; margin-top:6px}
-
-    .toolbar .search{margin-left:auto}
-    .search input{border:1px solid var(--chrome-dark);border-radius:20px;padding:6px 10px;font-size:12px;min-width:200px; box-shadow:0 1px 0 #fff inset}
-
-    .btn{
-      display:inline-flex;align-items:center;gap:8px; padding:8px 12px;border-radius:8px;border:1px solid #bfc7d8;
-      background:linear-gradient(#fefefe,#e9edf6); cursor:pointer; font-size:14px; text-decoration:none; color:#123;
-      box-shadow:0 1px 0 #fff inset, 0 2px 0 rgba(0,0,0,.04);
-    }
-    .btn:hover{background:linear-gradient(#fff,#eef3ff)}
-
-    .dock{
-      position:fixed;left:50%;transform:translateX(-50%);bottom:10px;z-index:30; display:flex; gap:14px;
-      padding:8px 18px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.28));
-      box-shadow:0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.8); backdrop-filter: blur(8px) saturate(1.2);
-      border:1px solid rgba(255,255,255,.6);
-    }
-    .dock a{display:block; width:52px; height:52px; border-radius:12px; background:#fff; box-shadow:0 3px 0 rgba(0,0,0,.15);
-      position:relative; text-decoration:none}
-    .dock a span{position:absolute; left:50%; transform:translateX(-50%); bottom:64px; background:rgba(0,0,0,.8); color:#fff; font-size:11px; padding:4px 8px; border-radius:6px; opacity:0; pointer-events:none; transition:.15s}
-    .dock a:hover span{opacity:1}
-    .dock img{width:100%; height:100%; border-radius:12px}
-
-    .footer{color:#cfd7ec; text-align:center; font-size:12px; margin:18px 0 80px;}
-
-    /* tiny responsive tweak */
-    @media (max-width: 720px){
-      .content{grid-template-columns:1fr}
-      .sidebar{border-right:0;border-bottom:1px solid rgba(0,0,0,.08)}
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
   </style>
 </head>
-<body>
-  <!-- Menu bar -->
-  <div class="menu-bar">
-    <div class="menu-apple"></div>
-    <div class="menu-item"><strong>Finder</strong></div>
-    <div class="menu-item">File</div>
-    <div class="menu-item">Edit</div>
-    <div class="menu-item">View</div>
-    <div class="menu-item">Go</div>
-    <div class="menu-item">Window</div>
-    <div class="menu-item">Help</div>
-  </div>
+<body class="min-h-screen bg-gradient-to-b from-amber-50 via-green-50 to-amber-50">
 
-  <main class="desktop" id="desktop">
-    <!-- Main window -->
-    <section class="window" role="region" aria-label="Profile window">
-      <div class="traffic" aria-hidden="true">
-        <div class="dot red" title="Close"></div>
-        <div class="dot yellow" title="Minimize"></div>
-        <div class="dot green" title="Zoom"></div>
-      </div>
-      <div class="toolbar">
-        <div class="seg" role="tablist" aria-label="Sections">
-          <button role="tab" data-section="about" aria-selected="true">About</button>
-          <button role="tab" data-section="work">Work</button>
-          <button role="tab" data-section="contact">Contact</button>
+  <!-- Top border -->
+  <div class="h-2 bg-gradient-to-r from-amber-700 via-emerald-700 to-amber-700"></div>
+
+  <!-- Nav -->
+  <nav class="sticky top-0 w-full bg-white/95 backdrop-blur-sm shadow-md z-50 border-b-2 border-emerald-200">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-center gap-4 sm:gap-8 text-emerald-900 uppercase text-xs font-semibold">
+      <a href="#home" class="hover:text-emerald-800 transition-colors text-[11px] tracking-wide">Inicio</a>
+      <a href="#locations" class="hover:text-emerald-800 transition-colors text-[11px] tracking-wide">Ubicaciones</a>
+      <a href="#dresscode" class="hover:text-emerald-800 transition-colors text-[11px] tracking-wide">Vestimenta</a>
+      <a href="#registry" class="hover:text-emerald-800 transition-colors text-[11px] tracking-wide">Regalos</a>
+      <a href="#recommendations" class="hover:text-emerald-800 transition-colors text-[11px] tracking-wide">Hospedaje</a>
+      <a href="#gallery" class="hover:text-emerald-800 transition-colors text-[11px] tracking-wide">Galería</a>
+      <a href="#itinerary" class="hover:text-emerald-800 transition-colors text-[11px] tracking-wide">Programa</a>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home" class="min-h-screen flex items-center justify-center pt-12 px-6 relative overflow-hidden">
+    <!-- Decorative leaves/flowers -->
+    <div class="absolute top-20 left-10 opacity-20 text-emerald-600 text-7xl">🌿</div>
+    <div class="absolute bottom-20 right-10 opacity-20 text-amber-500 text-8xl">🌸</div>
+
+    <div class="text-center max-w-3xl relative z-10">
+      <div class="mb-8">
+        <div class="text-5xl mb-6">🌸</div>
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <div class="w-24 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
+          <span class="text-emerald-600 text-xl">🌿</span>
+          <div class="w-24 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
         </div>
-        <div class="search">
-          <input id="search" type="search" placeholder="Search in window" aria-label="Search" />
-        </div>
       </div>
-      <div class="content">
-        <aside class="sidebar">
-          <div class="side-h">Places</div>
-          <nav>
-            <ul class="nav">
-              <li><a href="#about" class="active" data-section="about"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 100 14 7 7 0 000-14zm0 16c-4.418 0-8 2.239-8 5 0 1.104.896 1 2 12c1.104 0 2 .104 2-1 0-2.761-3.582-5-8-5z"/></svg> About Me</a></li>
-              <li><a href="#work" data-section="work"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 2h6a2 2 0 012 2v2h3a2 2 0 012 2v2H2V8a2 2 0 012-2h3V4a2 2 0 012-2zm8 6H7V40v4zM2 12h22v8a2 2 0 01-2 2H4a2 2 0 01-2-2v-8z"/></svg> Projects</a></li>
-              <li><a href="#contact" data-section="contact"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm-9 9a9 9 0 1118 0H3z"/></svg> Contact</a></li>
-            </ul>
-          </nav>
-        </aside>
-        <section class="main" id="panel">
-          <!-- About -->
-          <div class="view" data-view="about">
-            <h1 class="title">Tenho Saavedra</h1>
-            <p class="lead">Project manager who enjoys turning messy ideas into clean, shippable plans. I work across product, people, and process to make teams fast, sane, and customer‑focused.</p>
-            <div class="card">
-              <h3>Snapshot</h3>
-              <ul>
-                <li>🏷️ Role: Project Manager / Business development / Product and service development</li>
-                <li>🧭 Strengths: scope shaping, risk tracking, stakeholder comms, data‑informed prioritization</li>
-                <li>🛠 Tooling: Atlassian Suite & homebrew</li>
-                <li>🤖 Interests: Products, business and Scuba</li>
-              </ul>
+
+      <p class="text-sm uppercase tracking-widest text-emerald-800 mb-8 font-semibold">
+        Unidos en Amor
+      </p>
+
+      <h1 class="text-5xl sm:text-6xl md:text-7xl font-serif text-amber-900 mb-4 drop-shadow-sm" style="font-family: 'Playfair Display', serif;">
+        María
+      </h1>
+      <div class="my-6 text-4xl text-rose-600">❤️</div>
+      <h1 class="text-5xl sm:text-6xl md:text-7xl font-serif text-amber-900 mb-12 drop-shadow-sm" style="font-family: 'Playfair Display', serif;">
+        Juan
+      </h1>
+
+      <div class="flex items-center justify-center gap-4 my-8">
+        <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-600 to-transparent"></div>
+        <span class="text-amber-700 text-lg">🌸</span>
+        <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-600 to-transparent"></div>
+      </div>
+
+      <div class="bg-white/80 backdrop-blur-sm border-2 border-emerald-300 rounded-lg shadow-xl p-8 mb-10">
+        <p class="text-lg tracking-wide text-emerald-900 mb-2 font-semibold">
+          Sábado
+        </p>
+        <p class="text-3xl font-serif text-amber-800 mb-1" style="font-family: 'Playfair Display', serif;">
+          15 de Junio
+        </p>
+        <p class="text-2xl font-serif text-amber-700">
+          2025
+        </p>
+      </div>
+
+      <!-- Countdown -->
+      <p class="text-sm uppercase tracking-wider text-emerald-800 mb-4 font-semibold">Faltan</p>
+      <div class="flex justify-center gap-4 mb-8 flex-wrap">
+        <div class="text-center">
+          <div class="bg-gradient-to-br from-amber-100 to-green-100 border-2 border-emerald-400 rounded-lg shadow-lg px-4 py-4 min-w-[85px]">
+            <div id="countdown-days" class="text-4xl font-serif text-amber-900">0</div>
+            <div class="text-xs uppercase tracking-wide text-emerald-800 mt-2 font-semibold">
+              Días
             </div>
-            <div class="card">
-              <h3>CV / Resume</h3>
-              <p class="meta">Grab the latest copy as a PDF. Replace the file at <code>assets/Tenho_Saavedra_CV.pdf</code> when you deploy.</p>
-              <a class="btn" href="assets/Tenho_Saavedra_CV.pdf" download>
-                <!-- simple floppy icon -->
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 7v12a3 3 0 01-3 3H7a3 3 0 01-3-3V5a3 3 0 013-3h9l4 5zM7 4v6h8V4H7zm5 12H7v3h5v-3z"/></svg>
-                Download my CV (PDF)
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="bg-gradient-to-br from-amber-100 to-green-100 border-2 border-emerald-400 rounded-lg shadow-lg px-4 py-4 min-w-[85px]">
+            <div id="countdown-hours" class="text-4xl font-serif text-amber-900">0</div>
+            <div class="text-xs uppercase tracking-wide text-emerald-800 mt-2 font-semibold">
+              Horas
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="bg-gradient-to-br from-amber-100 to-green-100 border-2 border-emerald-400 rounded-lg shadow-lg px-4 py-4 min-w-[85px]">
+            <div id="countdown-minutes" class="text-4xl font-serif text-amber-900">0</div>
+            <div class="text-xs uppercase tracking-wide text-emerald-800 mt-2 font-semibold">
+              Min
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="bg-gradient-to-br from-amber-100 to-green-100 border-2 border-emerald-400 rounded-lg shadow-lg px-4 py-4 min-w-[85px]">
+            <div id="countdown-seconds" class="text-4xl font-serif text-amber-900">0</div>
+            <div class="text-xs uppercase tracking-wide text-emerald-800 mt-2 font-semibold">
+              Seg
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center gap-3 mt-12">
+        <span class="text-emerald-600 text-lg">🌿</span>
+        <div class="w-16 h-px bg-emerald-400"></div>
+        <span class="text-amber-600 text-xl">🌸</span>
+        <div class="w-16 h-px bg-emerald-400"></div>
+        <span class="text-emerald-600 text-lg">🌿</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section id="locations" class="py-20 px-6 bg-gradient-to-b from-white to-green-50">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-4xl mb-4">🌸</div>
+        <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Dónde Celebraremos</p>
+        <h2 class="text-4xl sm:text-5xl font-serif text-amber-900 mb-4" style="font-family: 'Playfair Display', serif;">
+          Nuestras Ubicaciones
+        </h2>
+        <div class="flex items-center justify-center gap-3 mt-6">
+          <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
+          <span class="text-amber-600 text-lg">🌿</span>
+          <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Ceremonia -->
+        <div class="bg-white border-4 border-emerald-200 rounded-xl shadow-xl p-10 relative overflow-hidden">
+          <div class="absolute top-4 right-4 opacity-10 text-6xl text-emerald-600">🌸</div>
+          <div class="relative z-10">
+            <div class="text-3xl mx-auto mb-4 text-emerald-700 text-center">📍</div>
+            <div class="h-1 w-16 bg-gradient-to-r from-amber-600 to-emerald-600 mx-auto mb-6 rounded"></div>
+            <h3 class="text-3xl font-serif mb-6 text-amber-900 text-center">Ceremonia Religiosa</h3>
+            <p class="text-xl text-emerald-900 mb-3 text-center font-semibold">Parroquia de San Miguel Arcángel</p>
+            <p class="text-amber-800 mb-2 text-center">Avenida Principal Número 123</p>
+            <p class="text-amber-700 mb-6 text-center">Centro Histórico</p>
+            <div class="bg-gradient-to-r from-emerald-100 to-amber-100 border-2 border-emerald-300 rounded-lg p-4 mb-6">
+              <p class="text-2xl font-serif text-emerald-900 text-center">4:00 PM</p>
+            </div>
+            <div class="text-center">
+              <a 
+                href="https://maps.google.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-block bg-gradient-to-r from-emerald-700 to-emerald-600 text-white px-8 py-3 rounded-full text-sm uppercase tracking-wide hover:from-emerald-800 hover:to-emerald-700 transition-all shadow-lg font-semibold"
+              >
+                Ver en el Mapa
               </a>
             </div>
           </div>
+        </div>
 
-          <!-- Work -->
-          <div class="view" data-view="work" hidden>
-            <h2 class="title">Selected Projects</h2>
-            <div class="card">
-              <h3>Project manager at Ecomond</h3>
-              <p>Building and delivering projects together with our team in the Nordics and Latin America.</p>
-              <p class="meta">Methods: value stream mapping, WIP limits, Monte Carlo forecasting.</p>
+        <!-- Recepción -->
+        <div class="bg-white border-4 border-amber-200 rounded-xl shadow-xl p-10 relative overflow-hidden">
+          <div class="absolute top-4 right-4 opacity-10 text-6xl text-amber-600">🌿</div>
+          <div class="relative z-10">
+            <div class="text-3xl mx-auto mb-4 text-amber-700 text-center">📍</div>
+            <div class="h-1 w-16 bg-gradient-to-r from-emerald-600 to-amber-600 mx-auto mb-6 rounded"></div>
+            <h3 class="text-3xl font-serif mb-6 text-amber-900 text-center">Recepción</h3>
+            <p class="text-xl text-emerald-900 mb-3 text-center font-semibold">Hacienda Los Olivos</p>
+            <p class="text-amber-800 mb-2 text-center">Camino Real Kilómetro 5</p>
+            <p class="text-amber-700 mb-6 text-center">Valle Verde</p>
+            <div class="bg-gradient-to-r from-amber-100 to-emerald-100 border-2 border-amber-300 rounded-lg p-4 mb-6">
+              <p class="text-2xl font-serif text-amber-900 text-center">6:00 PM</p>
             </div>
-            <div class="card">
-              <h3>Customer Portal Rollout</h3>
-              <p>Coordinated cross‑functional release of a self‑service portal; drove cutover plan, risk register, and stakeholder updates.</p>
-              <p class="meta">Outcome: 38% reduction in support tickets in 60 days.</p>
+            <div class="text-center">
+              <a 
+                href="https://maps.google.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-block bg-gradient-to-r from-amber-700 to-amber-600 text-white px-8 py-3 rounded-full text-sm uppercase tracking-wide hover:from-amber-800 hover:to-amber-700 transition-all shadow-lg font-semibold"
+              >
+                Ver en el Mapa
+              </a>
             </div>
           </div>
-
-          <!-- Contact -->
-          <div class="view" data-view="contact" hidden>
-            <h2 class="title">Contact</h2>
-            <div class="card">
-              <p>Best way to reach me: <a href="mailto:tenhosaavedra@gmail.com">tenhosaavedra(@)gmail.com</a></p>
-              <p class="meta">I’m open to interesting collaborations and hard problems with friendly people.</p>
-            </div>
-            <div class="card">
-              <h3>Elsewhere</h3>
-               <ul>
-                
-  <a href="https://www.linkedin.com/in/tenhosaavedra/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2">
-      <path d="M19 0h-14c-2.76 0-5 2.24-5 
-               5v14c0 2.76 2.24 5 5 
-               54c2.76 0 5-2.24 
-               5-5v-14c0-2.76-2.24-5-5-5zm-11 
-               19h-3v-10h3v10zm-1.5-11.29c-.96 
-               0-1.75-.79-1.75-1.75s.79-1.75 
-               1.75-1.75 1.75.79 
-               1.75 1.75-.79 1.75-1.75 
-               1.75zm13.5 11.29h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 
-               0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.88v1.37h.04c.4-.75 
-               1.38-1.54 2.84-1.54 3.04 0 3.6 
-               2 3.6 4.59v5.58z"/>
-    </svg>
-    <span style="color:#0A66C2; font-weight:600;">LinkedIn</span>
-  </a>
-
-                <!-- <li>GitHub — <a href="#" aria-disabled="true" onclick="alert('Replace with your profile URL'); return false;">Add your link</a></li> -->
-              </ul>
-            </div>
-          </div>
-        </section>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    
-  </main>
+  <!-- DRESSCODE -->
+  <section id="dresscode" class="py-20 px-6 bg-gradient-to-b from-green-50 to-amber-50">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="text-4xl mb-4 text-amber-700">🌿</div>
+      <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Código de Vestimenta</p>
+      <h2 class="text-4xl sm:text-5xl font-serif mb-6 text-amber-900" style="font-family: 'Playfair Display', serif;">
+        Etiqueta de Gala
+      </h2>
+      <div class="flex items-center justify-center gap-3 mb-12">
+        <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+        <span class="text-emerald-600 text-lg">🌸</span>
+        <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+      </div>
 
-  <!-- Dock -->
-  <nav class="dock" aria-label="Dock">
-    <a href="#about" data-section="about" title="About"><span>About</span><img alt="About icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23dbe5ff'/><path d='M12 12a5 5 0 100-10 5 5 0 000 10zm-9 9a9 9 0 1118 0H3z' fill='%23224477'/></svg>" /></a>
-    <a href="#work" data-section="work" title="Work"><span>Work</span><img alt="Work icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23e7f7ef'/><path d='M9 2h6a2 2 0 012 2v2h3a2 2 0 012 2v2H2V8a2 2 0 012-2h3V4a2 2 0 012-2zm8 6H7V40v4zM2 12h22v8a2 2 0 01-2 2H4a2 2 0 01-2-2v-8z' fill='%231b6f42'/></svg>" /></a>
-    <a href="#contact" data-section="contact" title="Contact"><span>Contact</span><img alt="Contact icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23ffe9e9'/><path d='M12 12a5 5 0 100-10 5 5 0 000 10zm-9 9a9 9 0 1118 0H3z' fill='%239c2a2a'/></svg>" /></a>
-    <a href="#" title="Download CV" onclick="document.querySelector('[href^=\'assets/\']').click(); return false;">
-      <span>Download CV</span>
-      <img alt="CV icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23fff8e1'/><path d='M6 2h9l5 5v13a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2zm7 0v5h5' fill='%238a6d00'/><path d='M12 12v6m0 0l-3-3m3 3l3-3' stroke='%238a6d00' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" /></a>
-  </nav>
+      <div class="bg-white border-4 border-double border-emerald-300 rounded-xl shadow-2xl p-12 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-5">
+          <div class="absolute top-4 left-4 text-6xl text-emerald-600">🌸</div>
+          <div class="absolute bottom-4 right-4 text-7xl text-amber-600">🌿</div>
+        </div>
 
+        <div class="relative z-10">
+          <p class="text-4xl sm:text-5xl font-serif mb-6 text-emerald-900" style="font-family: 'Playfair Display', serif;">
+            Formal
+          </p>
+          <p class="text-amber-800 mb-10 text-lg italic">Etiqueta rigurosa</p>
+
+          <div class="grid md:grid-cols-2 gap-10 mb-10">
+            <div class="bg-gradient-to-br from-emerald-50 to-amber-50 border-2 border-emerald-300 rounded-lg p-8">
+              <div class="w-36 h-36 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg mx-auto mb-6 shadow-lg border-4 border-amber-200"></div>
+              <p class="text-emerald-900 font-semibold text-xl mb-2">Caballeros</p>
+              <p class="text-amber-800">Traje oscuro o smoking</p>
+              <p class="text-sm text-emerald-700 mt-2">Corbata de preferencia</p>
+            </div>
+            <div class="bg-gradient-to-br from-amber-50 to-emerald-50 border-2 border-amber-300 rounded-lg p-8">
+              <div class="w-36 h-36 bg-gradient-to-br from-rose-300 via-purple-200 to-pink-200 rounded-lg mx-auto mb-6 shadow-lg border-4 border-emerald-200"></div>
+              <p class="text-emerald-900 font-semibold text-xl mb-2">Damas</p>
+              <p class="text-amber-800">Vestido largo de gala</p>
+              <p class="text-sm text-emerald-700 mt-2">Colores vibrantes bienvenidos</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-center gap-3 my-8">
+            <div class="w-16 h-px bg-amber-400"></div>
+            <span class="text-emerald-600 text-lg">🌸</span>
+            <div class="w-16 h-px bg-amber-400"></div>
+          </div>
+
+          <div class="bg-amber-100 border-2 border-amber-300 rounded-lg p-6">
+            <p class="text-sm text-amber-900 italic font-semibold">
+              Reservado para la novia: blanco, marfil y beige
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRY -->
+  <section id="registry" class="py-20 px-6 bg-gradient-to-b from-amber-50 to-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-4xl mb-4 text-emerald-700">🎁</div>
+        <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Mesa de Regalos</p>
+        <h2 class="text-4xl sm:text-5xl font-serif text-amber-900" style="font-family: 'Playfair Display', serif;">
+          Vuestros Obsequios
+        </h2>
+        <div class="flex items-center justify-center gap-3 mt-6">
+          <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
+          <span class="text-rose-600 text-lg">❤️</span>
+          <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
+        </div>
+      </div>
+
+      <div class="bg-white border-4 border-double border-amber-300 rounded-xl shadow-2xl p-12 relative overflow-hidden">
+        <div class="absolute -top-10 -right-10 opacity-5 text-8xl text-emerald-600">🌸</div>
+
+        <div class="relative z-10">
+          <p class="text-center text-amber-900 mb-10 leading-relaxed text-lg italic">
+            Vuestra presencia es el mayor regalo que podríamos recibir.
+            <br />
+            Si deseáis honrarnos con un presente, hemos preparado las siguientes opciones:
+          </p>
+
+          <div class="space-y-6">
+            <div class="bg-gradient-to-r from-emerald-50 to-amber-50 border-2 border-emerald-300 rounded-lg p-8 text-center">
+              <div class="inline-block bg-white rounded-full p-3 mb-4 text-emerald-700 text-2xl">
+                🎁
+              </div>
+              <h3 class="text-2xl font-serif mb-3 text-emerald-900">Liverpool</h3>
+              <p class="text-amber-800 mb-2 font-semibold">Número de evento</p>
+              <p class="text-emerald-900 text-2xl font-bold">12345678</p>
+            </div>
+
+            <div class="bg-gradient-to-r from-amber-50 to-emerald-50 border-2 border-amber-300 rounded-lg p-8 text-center">
+              <div class="inline-block bg-white rounded-full p-3 mb-4 text-amber-700 text-2xl">
+                🎁
+              </div>
+              <h3 class="text-2xl font-serif mb-3 text-amber-900">Amazon</h3>
+              <a href="#" class="text-emerald-700 hover:text-emerald-900 underline decoration-2 decoration-emerald-400 font-semibold text-lg">
+                Ver nuestra lista de deseos
+              </a>
+            </div>
+
+            <div class="bg-gradient-to-r from-emerald-50 to-amber-50 border-2 border-emerald-300 rounded-lg p-8 text-center">
+              <div class="inline-block bg-white rounded-full p-3 mb-4 text-rose-600 text-2xl">
+                ❤️
+              </div>
+              <h3 class="text-2xl font-serif mb-3 text-emerald-900">Lluvia de Sobres</h3>
+              <p class="text-amber-800 font-semibold">Habrá un buzón especial en la recepción</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECOMMENDATIONS (Hospedaje + Sitios de interés) -->
+  <section id="recommendations" class="py-20 px-6 bg-gradient-to-b from-white to-green-50">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-4xl mb-4 text-amber-700">🌿</div>
+        <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Para Invitados de Fuera</p>
+        <h2 class="text-4xl sm:text-5xl font-serif text-amber-900" style="font-family: 'Playfair Display', serif;">
+          Hospedaje y Visitas
+        </h2>
+        <div class="flex items-center justify-center gap-3 mt-6">
+          <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+          <span class="text-emerald-600 text-lg">🌸</span>
+          <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+        </div>
+      </div>
+
+      <div class="bg-white border-4 border-double border-emerald-300 rounded-xl shadow-2xl p-10">
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Alojamiento -->
+          <div class="bg-white border-4 border-emerald-200 rounded-xl shadow-xl p-10">
+            <div class="text-center mb-8">
+              <div class="inline-block bg-gradient-to-br from-emerald-100 to-amber-100 rounded-full p-4 mb-4">
+                <span class="text-emerald-700 text-2xl">📍</span>
+              </div>
+              <h3 class="text-3xl font-serif text-emerald-900">Alojamiento</h3>
+              <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto mt-4 rounded"></div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-600 rounded-lg p-6">
+                <h4 class="text-xl font-serif text-emerald-900 mb-2">Hotel Boutique Centro</h4>
+                <p class="text-amber-800 mb-1 font-semibold">A 10 minutos de los eventos</p>
+                <p class="text-emerald-700 text-sm">Teléfono: (555) 123-4567</p>
+              </div>
+              <div class="bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-600 rounded-lg p-6">
+                <h4 class="text-xl font-serif text-emerald-900 mb-2">Grand Hotel Plaza</h4>
+                <p class="text-amber-800 mb-1 font-semibold">A 15 minutos de los eventos</p>
+                <p class="text-emerald-700 text-sm">Teléfono: (555) 987-6543</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sitios de interés -->
+          <div class="bg-white border-4 border-amber-200 rounded-xl shadow-xl p-10">
+            <div class="text-center mb-8">
+              <div class="inline-block bg-gradient-to-br from-amber-100 to-emerald-100 rounded-full p-4 mb-4">
+                <span class="text-amber-700 text-2xl">🌸</span>
+              </div>
+              <h3 class="text-3xl font-serif text-amber-900">Sitios de Interés</h3>
+              <div class="w-16 h-1 bg-gradient-to-r from-amber-500 to-emerald-500 mx-auto mt-4 rounded"></div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-500 rounded-lg p-4">
+                <p class="text-emerald-900 font-semibold">Centro Histórico</p>
+              </div>
+              <div class="bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-500 rounded-lg p-4">
+                <p class="text-emerald-900 font-semibold">Museo de Arte Contemporáneo</p>
+              </div>
+              <div class="bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-500 rounded-lg p-4">
+                <p class="text-emerald-900 font-semibold">Mercado de Artesanías</p>
+              </div>
+              <div class="bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-500 rounded-lg p-4">
+                <p class="text-emerald-900 font-semibold">Parque Natural La Sierra</p>
+              </div>
+              <div class="bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-500 rounded-lg p-4">
+                <p class="text-emerald-900 font-semibold">Zona Gastronómica del Barrio Viejo</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="py-20 px-6 bg-gradient-to-b from-green-50 to-amber-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-4xl mb-4 text-rose-600">❤️</div>
+        <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Momentos Especiales</p>
+        <h2 class="text-4xl sm:text-5xl font-serif text-amber-900" style="font-family: 'Playfair Display', serif;">
+          Nuestra Historia de Amor
+        </h2>
+        <div class="flex items-center justify-center gap-3 mt-6">
+          <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
+          <span class="text-amber-600 text-lg">🌿</span>
+          <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Placeholder photo slots -->
+        <!-- Replace each with <img src="..." class="w-full h-full object-cover" /> as needed -->
+        <!-- using the same wrapper div classes -->
+        <!-- 8 items -->
+        <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
+          <div class="absolute inset-0 bg-white/30"></div>
+          <span class="text-emerald-600 text-4xl opacity-60 relative z-10">🌸</span>
+        </div>
+        <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
+          <div class="absolute inset-0 bg-white/30"></div>
+          <span class="text-emerald-600 text-4xl opacity-60 relative z-10">🌸</span>
+        </div>
+        <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
+          <div class="absolute inset-0 bg-white/30"></div>
+          <span class="text-emerald-600 text-4xl opacity-60 relative z-10">🌸</span>
+        </div>
+        <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
+          <div class="absolute inset-0 bg-white/30"></div>
+          <span class="text-emerald-600 text-4xl opacity-60 relative z-10">🌸</span>
+        </div>
+        <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
+          <div class="absolute inset-0 bg-white/30"></div>
+          <span class="text-emerald-600 text-4xl opacity-60 relative z-10">🌸</span>
+        </div>
+        <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
+          <div class="absolute inset-0 bg-white/30"></div>
+          <span class="text-emerald-600 text-4xl opacity-60 relative z-10">🌸</span>
+        </div>
+        <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
+          <div class="absolute inset-0 bg-white/30"></div>
+          <span class="text-emerald-600 text-4xl opacity-60 relative z-10">🌸</span>
+        </div>
+        <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
+          <div class="absolute inset-0 bg-white/30"></div>
+          <span class="text-emerald-600 text-4xl opacity-60 relative z-10">🌸</span>
+        </div>
+      </div>
+
+      <p class="text-center text-amber-800 mt-10 italic text-lg font-semibold">
+        Colocar vuestras fotografías favoritas
+      </p>
+    </div>
+  </section>
+
+  <!-- ITINERARY -->
+  <section id="itinerary" class="py-20 px-6 bg-gradient-to-b from-amber-50 to-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-4xl mb-4 text-emerald-700">🕰️</div>
+        <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Cronograma</p>
+        <h2 class="text-4xl sm:text-5xl font-serif text-amber-900" style="font-family: 'Playfair Display', serif;">
+          Programa del Día
+        </h2>
+        <div class="flex items-center justify-center gap-3 mt-6">
+          <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+          <span class="text-emerald-600 text-lg">🌸</span>
+          <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+        </div>
+      </div>
+
+      <div class="bg-white border-4 border-double border-emerald-300 rounded-xl shadow-2xl p-10 relative overflow-hidden">
+        <div class="absolute -bottom-10 -left-10 opacity-5 text-8xl text-amber-600">🌿</div>
+
+        <div class="space-y-8 relative z-10">
+          <div class="flex flex-col sm:flex-row items-start bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-600 rounded-lg p-6 shadow-md">
+            <div class="sm:min-w-[100px] sm:mr-6 text-left sm:text-right mb-4 sm:mb-0">
+              <p class="text-3xl font-serif text-emerald-900">4:00</p>
+              <p class="text-xs uppercase tracking-wider text-amber-700 mt-1 font-semibold">PM</p>
+            </div>
+            <div class="flex-1 pt-2">
+              <h3 class="text-2xl font-serif text-amber-900 mb-2">Ceremonia Religiosa</h3>
+              <p class="text-emerald-800 font-semibold">Parroquia de San Miguel Arcángel</p>
+            </div>
+            <div class="ml-4 text-emerald-600 text-3xl hidden sm:block">🌸</div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-start bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-600 rounded-lg p-6 shadow-md">
+            <div class="sm:min-w-[100px] sm:mr-6 text-left sm:text-right mb-4 sm:mb-0">
+              <p class="text-3xl font-serif text-amber-900">6:00</p>
+              <p class="text-xs uppercase tracking-wider text-emerald-700 mt-1 font-semibold">PM</p>
+            </div>
+            <div class="flex-1 pt-2">
+              <h3 class="text-2xl font-serif text-amber-900 mb-2">Cóctel de Recepción</h3>
+              <p class="text-emerald-800 font-semibold">Jardines de Hacienda Los Olivos</p>
+            </div>
+            <div class="ml-4 text-amber-600 text-3xl hidden sm:block">🌿</div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-start bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-600 rounded-lg p-6 shadow-md">
+            <div class="sm:min-w-[100px] sm:mr-6 text-left sm:text-right mb-4 sm:mb-0">
+              <p class="text-3xl font-serif text-emerald-900">7:30</p>
+              <p class="text-xs uppercase tracking-wider text-amber-700 mt-1 font-semibold">PM</p>
+            </div>
+            <div class="flex-1 pt-2">
+              <h3 class="text-2xl font-serif text-amber-900 mb-2">Cena de Gala</h3>
+              <p class="text-emerald-800 font-semibold">Salón Principal</p>
+            </div>
+            <div class="ml-4 text-emerald-600 text-3xl hidden sm:block">🌸</div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-start bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-600 rounded-lg p-6 shadow-md">
+            <div class="sm:min-w-[100px] sm:mr-6 text-left sm:text-right mb-4 sm:mb-0">
+              <p class="text-3xl font-serif text-amber-900">9:00</p>
+              <p class="text-xs uppercase tracking-wider text-emerald-700 mt-1 font-semibold">PM</p>
+            </div>
+            <div class="flex-1 pt-2">
+              <h3 class="text-2xl font-serif text-amber-900 mb-2">Vals de los Novios</h3>
+              <p class="text-emerald-800 font-semibold">Apertura de Pista de Baile</p>
+            </div>
+            <div class="ml-4 text-rose-600 text-3xl hidden sm:block">❤️</div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-start bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-600 rounded-lg p-6 shadow-md">
+            <div class="sm:min-w-[100px] sm:mr-6 text-left sm:text-right mb-4 sm:mb-0">
+              <p class="text-3xl font-serif text-emerald-900">9:30</p>
+              <p class="text-xs uppercase tracking-wider text-amber-700 mt-1 font-semibold">PM</p>
+            </div>
+            <div class="flex-1 pt-2">
+              <h3 class="text-2xl font-serif text-amber-900 mb-2">Baile y Celebración</h3>
+              <p class="text-emerald-800 font-semibold">¡A bailar hasta el amanecer!</p>
+            </div>
+            <div class="ml-4 text-amber-600 text-3xl hidden sm:block">🌿</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gradient-to-b from-emerald-900 to-emerald-950 text-white py-16 px-6 text-center relative overflow-hidden">
+    <div class="absolute top-10 left-10 opacity-10 text-amber-400 text-6xl">🌸</div>
+    <div class="absolute bottom-10 right-10 opacity-10 text-amber-400 text-6xl">🌿</div>
+
+    <div class="relative z-10">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <div class="w-16 h-px bg-amber-400"></div>
+        <span class="text-rose-400 text-3xl">❤️</span>
+        <div class="w-16 h-px bg-amber-400"></div>
+      </div>
+
+      <p class="text-3xl sm:text-4xl font-serif mb-4 text-amber-100" style="font-family: 'Playfair Display', serif;">
+        María & Juan
+      </p>
+      <p class="text-amber-300 mb-2 tracking-wide text-lg">15 de Junio de 2025</p>
+
+      <div class="flex items-center justify-center gap-3 my-8">
+        <span class="text-amber-400 text-lg">🌿</span>
+        <div class="w-12 h-px bg-amber-400"></div>
+        <span class="text-amber-400 text-xl">🌸</span>
+        <div class="w-12 h-px bg-amber-400"></div>
+        <span class="text-amber-400 text-lg">🌿</span>
+      </div>
+
+      <p class="text-emerald-200 text-lg italic">
+        Será un honor celebrar este día tan especial con vosotros
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bottom border -->
+  <div class="h-2 bg-gradient-to-r from-amber-700 via-emerald-700 to-amber-700"></div>
+
+  <!-- Countdown Script -->
   <script>
-    // simple tab + nav sync and in-window search
-    const views = [...document.querySelectorAll('.view')];
-    const tabButtons = [...document.querySelectorAll('[data-section]')];
-    function show(section){
-      views.forEach(v=>{ v.hidden = v.dataset.view !== section; });
-      document.querySelectorAll('.nav a').forEach(a=>{
-        a.classList.toggle('active', a.dataset.section === section);
-      });
-      window.location.hash = section;
-    }
-    tabButtons.forEach(b=>{
-      b.addEventListener('click', (e)=>{
-        const sec = e.currentTarget.dataset.section;
-        if(sec) show(sec);
-      });
-    });
-    // hash routing
-    const initial = (location.hash || '#about').replace('#','');
-    show(initial);
+    (function () {
+      const weddingDate = new Date('2025-06-15T16:00:00');
 
-    // In-window search filter (very lightweight)
-    const search = document.getElementById('search');
-    search.addEventListener('input', (e)=>{
-      const q = e.target.value.trim().toLowerCase();
-      const active = views.find(v=>!v.hidden);
-      [...active.querySelectorAll('.card, .lead, .title, li, p, h3')].forEach(el=>{
-        const match = el.textContent.toLowerCase().includes(q);
-        el.style.display = q && !match && el.className.includes('card') ? 'none' : '';
-      });
-    });
+      function updateCountdown() {
+        const now = new Date();
+        let diff = weddingDate - now;
+
+        if (diff < 0) diff = 0;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('countdown-days').textContent = days;
+        document.getElementById('countdown-hours').textContent = hours;
+        document.getElementById('countdown-minutes').textContent = minutes;
+        document.getElementById('countdown-seconds').textContent = seconds;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
   </script>
+
 </body>
 </html>
