@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Our Wedding – Ana & Luis</title>
+  <title>Our Wedding – Myrnaa & Tenho</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
@@ -40,7 +40,7 @@
     body {
       font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #ffe6e9 0, #fff9f7 45%, #fff 100%);
+      background: radial-gradient(circle at top, #ebe8e0 0, #fff9f7 45%, #fff 100%);
       color: var(--text);
       line-height: 1.6;
       scroll-behavior: smooth;
