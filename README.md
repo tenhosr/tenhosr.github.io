@@ -1,684 +1,900 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>María & Juan - Nuestra Boda</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Our Wedding – Ana & Luis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Join us in celebrating the wedding of Ana & Luis."
+  />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #fff9f7;
+      --bg-alt: #ffffff;
+      --accent: #e49ba3;
+      --accent-dark: #c7747f;
+      --text: #3b3233;
+      --muted: #8b7a7b;
+      --card-shadow: 0 16px 35px rgba(0, 0, 0, 0.06);
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #ffe6e9 0, #fff9f7 45%, #fff 100%);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: var(--accent-dark);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 249, 247, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-family: "Playfair Display", serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      border-color: var(--accent);
+      background: #fff;
+      color: var(--accent-dark);
+    }
+
+    .hero {
+      max-width: var(--max-width);
+      margin: 1.5rem auto 2rem;
+      padding: 1.5rem 1.25rem 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, #ffffff, #ffeef1);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "♥";
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.05;
+      right: -1rem;
+      top: -2rem;
+    }
+
+    .hero-subtitle {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-names {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-names span {
+      color: var(--accent-dark);
+    }
+
+    .hero-date {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #49c469;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.3rem;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 12px 25px rgba(199, 116, 127, 0.35);
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        filter 0.12s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(199, 116, 127, 0.4);
+      filter: brightness(1.03);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 0.55rem 1.1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn-ghost:hover {
+      background: #fff;
+      transform: translateY(-1px);
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .countdown-card,
+    .music-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 1.3rem 1.4rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 500px) {
+      .countdown-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .countdown-item {
+      background: #fff6f8;
+      border-radius: 18px;
+      padding: 0.7rem 0.4rem;
+      text-align: center;
+    }
+
+    .count-number {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      font-family: "Playfair Display", serif;
+      margin-bottom: 0.2rem;
+    }
+
+    .count-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .music-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto 3rem;
+      padding: 0 1.25rem 2rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-intro {
+      max-width: 600px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 800px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.4rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .card h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .chip {
+      display: inline-block;
+      margin-top: 0.4rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: #fff4f6;
+      color: var(--accent-dark);
+    }
+
+    .details-list {
+      list-style: none;
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .details-list li + li {
+      margin-top: 0.3rem;
+    }
+
+    .details-label {
+      font-weight: 600;
+      color: var(--text);
+      margin-right: 0.25rem;
+    }
+
+    .timeline {
+      margin-top: 0.75rem;
+      border-left: 2px dashed #f3c0c7;
+      padding-left: 1.1rem;
+    }
+
+    .timeline-item {
+      margin-bottom: 0.7rem;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.17rem;
+      top: 0.1rem;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-dark);
+    }
+
+    .timeline-time {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+    }
+
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
+      background: #000;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      max-height: 420px;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      padding: 0 0.4rem;
+    }
+
+    .carousel-btn {
+      pointer-events: auto;
+      border: none;
+      background: rgba(255, 255, 255, 0.85);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--accent-dark);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .carousel-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 0.6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .carousel-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      background: transparent;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: background 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .carousel-dot.active {
+      background: #fff;
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    /* RSVP */
+    .rsvp-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 800px) {
+      .rsvp-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .rsvp-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 0.55rem 0.7rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+      background: #fff;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent-dark);
+      box-shadow: 0 0 0 1px rgba(196, 83, 104, 0.25);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .rsvp-list {
+      font-size: 0.9rem;
+      max-height: 270px;
+      overflow: auto;
+      padding-right: 0.4rem;
+    }
+
+    .rsvp-item {
+      padding: 0.5rem 0.3rem;
+      border-bottom: 1px dashed #f2d0d6;
+    }
+
+    .rsvp-item:last-child {
+      border-bottom: none;
+    }
+
+    .rsvp-name {
+      font-weight: 600;
+    }
+
+    .rsvp-status {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .rsvp-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .badge-yes {
+      color: #1c8d4a;
+    }
+
+    .badge-no {
+      color: #b24040;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 1.5rem 1.25rem 2rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+      background: #fff;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-b from-amber-50 via-green-50 to-amber-50">
-    <!-- Decorative top border -->
-    <div class="h-2 bg-gradient-to-r from-amber-700 via-emerald-700 to-amber-700"></div>
-    
-    <!-- Navigation -->
-    <nav class="sticky top-0 w-full bg-white/95 backdrop-blur-sm shadow-md z-50 border-b-2 border-emerald-200">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-center gap-8 text-emerald-900 uppercase text-xs font-semibold">
-            <a href="#home" class="hover:text-emerald-800 transition-colors text-sm tracking-wide">Inicio</a>
-            <a href="#locations" class="hover:text-emerald-800 transition-colors text-sm tracking-wide">Ubicaciones</a>
-            <a href="#dresscode" class="hover:text-emerald-800 transition-colors text-sm tracking-wide">Vestimenta</a>
-            <a href="#registry" class="hover:text-emerald-800 transition-colors text-sm tracking-wide">Regalos</a>
-            <a href="#recommendations" class="hover:text-emerald-800 transition-colors text-sm tracking-wide">Hospedaje</a>
-            <a href="#gallery" class="hover:text-emerald-800 transition-colors text-sm tracking-wide">Galería</a>
-            <a href="#itinerary" class="hover:text-emerald-800 transition-colors text-sm tracking-wide">Programa</a>
-        </div>
-    </nav>
+<body>
+  <!-- Background music -->
+  <!-- Replace assets/music.mp3 with your own file path -->
+  <audio id="bg-music" src="assets/music.mp3" loop></audio>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center pt-12 px-6 relative overflow-hidden">
-        <!-- Decorative elements -->
-        <div class="absolute top-20 left-10 opacity-20">
-            <svg class="w-32 h-32 text-emerald-600" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
+  <header>
+    <div class="nav-inner">
+      <div class="brand">Ana &amp; Luis</div>
+      <nav>
+        <ul>
+          <li><a href="#countdown">Countdown</a></li>
+          <li><a href="#venue">Ceremony &amp; Party</a></li>
+          <li><a href="#gallery">Photos</a></li>
+          <li><a href="#gifts">Gifts</a></li>
+          <li><a href="#program">Program</a></li>
+          <li><a href="#stay">Stay &amp; Activities</a></li>
+          <li><a href="#rsvp">RSVP</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card">
+      <div class="hero-subtitle">We are getting married</div>
+      <div class="hero-names"><span>Ana</span> &amp; <span>Luis</span></div>
+      <div class="hero-date">Saturday · June 20, 2026 · 4:00 PM</div>
+      <p>
+        Family and friends, we would love to celebrate our wedding day with you.
+        Below you will find all the details about the ceremony, party, hotels,
+        and how to confirm your attendance.
+      </p>
+
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});">
+          Confirm your attendance
+        </button>
+        <div class="pill">
+          <div class="pill-dot"></div>
+          <span>Counting the days until we say “I do”</span>
         </div>
-        <div class="absolute bottom-20 right-10 opacity-20">
-            <svg class="w-40 h-40 text-amber-600" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-            </svg>
+      </div>
+    </div>
+
+    <div class="hero-side">
+      <div class="countdown-card" id="countdown">
+        <div class="section-label">Countdown</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:0.7rem;">
+          Until our wedding day
+        </h2>
+        <div class="countdown-grid">
+          <div class="countdown-item">
+            <div class="count-number" id="days">0</div>
+            <div class="count-label">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div class="count-number" id="hours">0</div>
+            <div class="count-label">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="count-number" id="minutes">0</div>
+            <div class="count-label">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div class="count-number" id="seconds">0</div>
+            <div class="count-label">Seconds</div>
+          </div>
         </div>
-        
-        <div class="text-center max-w-3xl relative z-10">
-            <div class="mb-8">
-                <svg class="w-16 h-16 mx-auto text-emerald-700 mb-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-                </svg>
-                <div class="flex items-center justify-center gap-4 mb-6">
-                    <div class="w-24 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
-                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    </svg>
-                    <div class="w-24 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
-                </div>
-            </div>
-            
-            <p class="text-sm uppercase tracking-widest text-emerald-800 mb-8 font-semibold">
-                Unidos en Amor
+      </div>
+
+      <div class="music-card">
+        <div class="section-label">Music</div>
+        <div class="music-row">
+          <div>
+            <strong>Our song is playing</strong>
+            <p style="font-size:0.85rem;color:var(--muted);margin-top:0.2rem;">
+              Tap play to listen to the soundtrack of our story.
             </p>
-            
-            <h1 class="text-7xl md:text-8xl font-serif text-amber-900 mb-4 drop-shadow-sm">
-                María
-            </h1>
-            <div class="my-6">
-                <svg class="w-10 h-10 mx-auto text-rose-600 fill-rose-600" viewBox="0 0 24 24">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                </svg>
-            </div>
-            <h1 class="text-7xl md:text-8xl font-serif text-amber-900 mb-12 drop-shadow-sm">
-                Juan
-            </h1>
-            
-            <div class="flex items-center justify-center gap-4 my-8">
-                <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-600 to-transparent"></div>
-                <svg class="w-5 h-5 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                </svg>
-                <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-600 to-transparent"></div>
-            </div>
-            
-            <div class="bg-white/80 backdrop-blur-sm border-2 border-emerald-300 rounded-lg shadow-xl p-8 mb-10">
-                <p class="text-lg tracking-wide text-emerald-900 mb-2 font-semibold">
-                    Sábado
-                </p>
-                <p class="text-3xl font-serif text-amber-800 mb-1">
-                    15 de Junio
-                </p>
-                <p class="text-2xl font-serif text-amber-700">
-                    2025
-                </p>
-            </div>
-            
-            <!-- Countdown -->
-            <p class="text-sm uppercase tracking-wider text-emerald-800 mb-4 font-semibold">Faltan</p>
-            <div class="flex justify-center gap-4 mb-8">
-                <div class="text-center">
-                    <div class="bg-gradient-to-br from-amber-100 to-green-100 border-2 border-emerald-400 rounded-lg shadow-lg px-4 py-4 min-w-[85px]">
-                        <div class="text-4xl font-serif text-amber-900" id="days">0</div>
-                        <div class="text-xs uppercase tracking-wide text-emerald-800 mt-2 font-semibold">Días</div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <div class="bg-gradient-to-br from-amber-100 to-green-100 border-2 border-emerald-400 rounded-lg shadow-lg px-4 py-4 min-w-[85px]">
-                        <div class="text-4xl font-serif text-amber-900" id="hours">0</div>
-                        <div class="text-xs uppercase tracking-wide text-emerald-800 mt-2 font-semibold">Horas</div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <div class="bg-gradient-to-br from-amber-100 to-green-100 border-2 border-emerald-400 rounded-lg shadow-lg px-4 py-4 min-w-[85px]">
-                        <div class="text-4xl font-serif text-amber-900" id="minutes">0</div>
-                        <div class="text-xs uppercase tracking-wide text-emerald-800 mt-2 font-semibold">Min</div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <div class="bg-gradient-to-br from-amber-100 to-green-100 border-2 border-emerald-400 rounded-lg shadow-lg px-4 py-4 min-w-[85px]">
-                        <div class="text-4xl font-serif text-amber-900" id="seconds">0</div>
-                        <div class="text-xs uppercase tracking-wide text-emerald-800 mt-2 font-semibold">Seg</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="flex items-center justify-center gap-3 mt-12">
-                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                </svg>
-                <div class="w-16 h-px bg-emerald-400"></div>
-                <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                </svg>
-                <div class="w-16 h-px bg-emerald-400"></div>
-                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                </svg>
-            </div>
+          </div>
+          <button id="music-toggle" class="btn-ghost">
+            <span id="music-icon">▶</span>
+            <span id="music-label">Play</span>
+          </button>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- Ceremony & Reception -->
+    <section id="venue">
+      <div class="section-label">Ceremony &amp; Party</div>
+      <h2 class="section-title">Where to celebrate with us</h2>
+      <p class="section-intro">
+        We will celebrate our union with a wedding mass followed by a dinner and
+        party nearby. You can find directions and parking information below.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Wedding Mass</h3>
+          <p>Join us as we exchange our vows.</p>
+          <ul class="details-list">
+            <li><span class="details-label">Location:</span>St. Mary’s Church</li>
+            <li><span class="details-label">Address:</span>Main Street 123, City</li>
+            <li><span class="details-label">Time:</span>4:00 PM</li>
+          </ul>
+          <p style="margin-top:0.6rem;">
+            <a href="https://maps.google.com" target="_blank" rel="noopener">
+              Open church in Google Maps →
+            </a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Dinner &amp; Party</h3>
+          <p>Let’s eat, dance and celebrate together.</p>
+          <ul class="details-list">
+            <li><span class="details-label">Location:</span>Garden View Hall</li>
+            <li><span class="details-label">Address:</span>Lake Avenue 45, City</li>
+            <li><span class="details-label">Starts:</span>6:00 PM</li>
+          </ul>
+          <p style="margin-top:0.6rem;">
+            <a href="https://maps.google.com" target="_blank" rel="noopener">
+              Open reception in Google Maps →
+            </a>
+          </p>
+          <p style="margin-top:0.6rem;font-size:0.86rem;color:var(--muted);">
+            A shuttle will depart from the church directly after the ceremony.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <!-- Locations Section -->
-    <section id="locations" class="py-20 px-6 bg-gradient-to-b from-white to-green-50">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16">
-                <svg class="w-12 h-12 mx-auto mb-4 text-emerald-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                </svg>
-                <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Dónde Celebraremos</p>
-                <h2 class="text-5xl font-serif text-amber-900 mb-4">
-                    Nuestras Ubicaciones
-                </h2>
-                <div class="flex items-center justify-center gap-3 mt-6">
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
-                    <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    </svg>
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
-                </div>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Church -->
-                <div class="bg-white border-4 border-emerald-200 rounded-xl shadow-xl p-10 relative overflow-hidden">
-                    <div class="absolute top-4 right-4 opacity-10">
-                        <svg class="w-32 h-32 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10"/>
-                        </svg>
-                    </div>
-                    <div class="relative z-10">
-                        <svg class="w-8 h-8 mx-auto mb-4 text-emerald-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        <div class="h-1 w-16 bg-gradient-to-r from-amber-600 to-emerald-600 mx-auto mb-6 rounded"></div>
-                        <h3 class="text-3xl font-serif mb-6 text-amber-900 text-center">Ceremonia Religiosa</h3>
-                        <p class="text-xl text-emerald-900 mb-3 text-center font-semibold">Parroquia de San Miguel Arcángel</p>
-                        <p class="text-amber-800 mb-2 text-center">Avenida Principal Número 123</p>
-                        <p class="text-amber-700 mb-6 text-center">Centro Histórico</p>
-                        <div class="bg-gradient-to-r from-emerald-100 to-amber-100 border-2 border-emerald-300 rounded-lg p-4 mb-6">
-                            <p class="text-2xl font-serif text-emerald-900 text-center">4:00 PM</p>
-                        </div>
-                        <div class="text-center">
-                            <a 
-                                href="https://maps.google.com" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                class="inline-block bg-gradient-to-r from-emerald-700 to-emerald-600 text-white px-8 py-3 rounded-full text-sm uppercase tracking-wide hover:from-emerald-800 hover:to-emerald-700 transition-all shadow-lg font-semibold"
-                            >
-                                Ver en el Mapa
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <!-- Gallery / Carousel -->
+    <section id="gallery">
+      <div class="section-label">Photos</div>
+      <h2 class="section-title">A few moments from our story</h2>
+      <p class="section-intro">
+        From the first coffee together to saying “yes”, these are some of the
+        little moments that brought us here. Replace these photos with your
+        favorites.
+      </p>
 
-                <!-- Reception -->
-                <div class="bg-white border-4 border-amber-200 rounded-xl shadow-xl p-10 relative overflow-hidden">
-                    <div class="absolute top-4 right-4 opacity-10">
-                        <svg class="w-32 h-32 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        </svg>
-                    </div>
-                    <div class="relative z-10">
-                        <svg class="w-8 h-8 mx-auto mb-4 text-amber-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        <div class="h-1 w-16 bg-gradient-to-r from-emerald-600 to-amber-600 mx-auto mb-6 rounded"></div>
-                        <h3 class="text-3xl font-serif mb-6 text-amber-900 text-center">Recepción</h3>
-                        <p class="text-xl text-emerald-900 mb-3 text-center font-semibold">Hacienda Los Olivos</p>
-                        <p class="text-amber-800 mb-2 text-center">Camino Real Kilómetro 5</p>
-                        <p class="text-amber-700 mb-6 text-center">Valle Verde</p>
-                        <div class="bg-gradient-to-r from-amber-100 to-emerald-100 border-2 border-amber-300 rounded-lg p-4 mb-6">
-                            <p class="text-2xl font-serif text-amber-900 text-center">6:00 PM</p>
-                        </div>
-                        <div class="text-center">
-                            <a 
-                                href="https://maps.google.com" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                class="inline-block bg-gradient-to-r from-amber-700 to-amber-600 text-white px-8 py-3 rounded-full text-sm uppercase tracking-wide hover:from-amber-800 hover:to-amber-700 transition-all shadow-lg font-semibold"
-                            >
-                                Ver en el Mapa
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="carousel" aria-label="Photo carousel of the couple">
+        <div class="carousel-track" id="carousel-track">
+          <!-- Slide 1 -->
+          <div class="carousel-slide">
+            <!-- Replace image paths with your own -->
+            <img src="images/photo1.jpg" alt="The couple smiling on a sunny afternoon" />
+            <div class="carousel-caption">The day everything started.</div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="carousel-slide">
+            <img src="images/photo2.jpg" alt="The couple walking by the sea at sunset" />
+            <div class="carousel-caption">Sunsets, long walks and shared dreams.</div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="carousel-slide">
+            <img src="images/photo3.jpg" alt="The proposal moment with a ring" />
+            <div class="carousel-caption">The moment we said “forever”.</div>
+          </div>
         </div>
+
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prev-slide" aria-label="Previous photo">
+            ‹
+          </button>
+          <button class="carousel-btn" id="next-slide" aria-label="Next photo">
+            ›
+          </button>
+        </div>
+
+        <div class="carousel-dots" id="carousel-dots">
+          <button class="carousel-dot active" data-index="0" aria-label="Go to photo 1"></button>
+          <button class="carousel-dot" data-index="1" aria-label="Go to photo 2"></button>
+          <button class="carousel-dot" data-index="2" aria-label="Go to photo 3"></button>
+        </div>
+      </div>
     </section>
 
-    <!-- Dress Code Section -->
-    <section id="dresscode" class="py-20 px-6 bg-gradient-to-b from-green-50 to-amber-50">
-        <div class="max-w-4xl mx-auto text-center">
-            <svg class="w-12 h-12 mx-auto mb-4 text-amber-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-            </svg>
-            <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Código de Vestimenta</p>
-            <h2 class="text-5xl font-serif mb-6 text-amber-900">
-                Etiqueta de Gala
-            </h2>
-            <div class="flex items-center justify-center gap-3 mb-12">
-                <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
-                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                </svg>
-                <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
-            </div>
-            
-            <div class="bg-white border-4 border-double border-emerald-300 rounded-xl shadow-2xl p-12 relative overflow-hidden">
-                <div class="relative z-10">
-                    <p class="text-5xl font-serif mb-6 text-emerald-900">
-                        Formal
-                    </p>
-                    <p class="text-amber-800 mb-10 text-lg italic">Etiqueta rigurosa</p>
-                    
-                    <div class="grid md:grid-cols-2 gap-10 mb-10">
-                        <div class="bg-gradient-to-br from-emerald-50 to-amber-50 border-2 border-emerald-300 rounded-lg p-8">
-                            <div class="w-36 h-36 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg mx-auto mb-6 shadow-lg border-4 border-amber-200"></div>
-                            <p class="text-emerald-900 font-semibold text-xl mb-2">Caballeros</p>
-                            <p class="text-amber-800">Traje oscuro o smoking</p>
-                            <p class="text-sm text-emerald-700 mt-2">Corbata de preferencia</p>
-                        </div>
-                        <div class="bg-gradient-to-br from-amber-50 to-emerald-50 border-2 border-amber-300 rounded-lg p-8">
-                            <div class="w-36 h-36 bg-gradient-to-br from-rose-300 via-purple-200 to-pink-200 rounded-lg mx-auto mb-6 shadow-lg border-4 border-emerald-200"></div>
-                            <p class="text-emerald-900 font-semibold text-xl mb-2">Damas</p>
-                            <p class="text-amber-800">Vestido largo de gala</p>
-                            <p class="text-sm text-emerald-700 mt-2">Colores vibrantes bienvenidos</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center justify-center gap-3 my-8">
-                        <div class="w-16 h-px bg-amber-400"></div>
-                        <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10"/>
-                        </svg>
-                        <div class="w-16 h-px bg-amber-400"></div>
-                    </div>
-                    
-                    <div class="bg-amber-100 border-2 border-amber-300 rounded-lg p-6">
-                        <p class="text-sm text-amber-900 italic font-semibold">
-                            Reservado para la novia: blanco, marfil y beige
-                        </p>
-                    </div>
-                </div>
-            </div>
+    <!-- Gift board / Mesa de regalos -->
+    <section id="gifts">
+      <div class="section-label">Gifts · Mesa de regalos</div>
+      <h2 class="section-title">Your presence is the greatest gift</h2>
+      <p class="section-intro">
+        Having you with us on this day is what matters most. If you would still
+        like to give us a gift, here are some options that will help us build
+        our home together.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Gift Registry</h3>
+          <p>We have created a small list of things for our new home.</p>
+          <ul class="details-list">
+            <li>
+              <span class="details-label">Store 1:</span>
+              <a href="https://example.com/registry1" target="_blank" rel="noopener">
+                Home Store Registry
+              </a>
+            </li>
+            <li>
+              <span class="details-label">Store 2:</span>
+              <a href="https://example.com/registry2" target="_blank" rel="noopener">
+                Online Registry
+              </a>
+            </li>
+          </ul>
         </div>
+
+        <div class="card">
+          <h3>Honeymoon fund</h3>
+          <p>
+            If you prefer, you can contribute to our honeymoon and future
+            adventures together.
+          </p>
+          <ul class="details-list">
+            <li><span class="details-label">Bank:</span>Romantic Bank</li>
+            <li><span class="details-label">Account:</span>1234 · 5678 · 90</li>
+            <li><span class="details-label">Reference:</span>Ana &amp; Luis Wedding</li>
+          </ul>
+          <span class="chip">Thank you for your love and generosity</span>
+        </div>
+      </div>
     </section>
 
-    <!-- Registry Section -->
-    <section id="registry" class="py-20 px-6 bg-gradient-to-b from-amber-50 to-white">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <svg class="w-12 h-12 mx-auto mb-4 text-emerald-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path d="M20 7h-4V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-6 0h-4V5h4v2z"/>
-                </svg>
-                <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Mesa de Regalos</p>
-                <h2 class="text-5xl font-serif text-amber-900">
-                    Vuestros Obsequios
-                </h2>
-                <div class="flex items-center justify-center gap-3 mt-6">
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
-                    <svg class="w-4 h-4 text-rose-600 fill-rose-600" viewBox="0 0 24 24">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
-                </div>
-            </div>
-            
-            <div class="bg-white border-4 border-double border-amber-300 rounded-xl shadow-2xl p-12 relative overflow-hidden">
-                <div class="relative z-10">
-                    <p class="text-center text-amber-900 mb-10 leading-relaxed text-lg italic">
-                        Vuestra presencia es el mayor regalo que podríamos recibir.
-                        <br />
-                        Si deseáis honrarnos con un presente, hemos preparado las siguientes opciones:
-                    </p>
-                    
-                    <div class="space-y-6">
-                        <div class="bg-gradient-to-r from-emerald-50 to-amber-50 border-2 border-emerald-300 rounded-lg p-8 text-center">
-                            <div class="inline-block bg-white rounded-full p-3 mb-4">
-                                <svg class="w-6 h-6 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path d="M20 7h-4V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-2xl font-serif mb-3 text-emerald-900">Liverpool</h3>
-                            <p class="text-amber-800 mb-2 font-semibold">Número de evento</p>
-                            <p class="text-emerald-900 text-2xl font-bold">12345678</p>
-                        </div>
-                        
-                        <div class="bg-gradient-to-r from-amber-50 to-emerald-50 border-2 border-amber-300 rounded-lg p-8 text-center">
-                            <div class="inline-block bg-white rounded-full p-3 mb-4">
-                                <svg class="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path d="M20 7h-4V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-2xl font-serif mb-3 text-amber-900">Amazon</h3>
-                            <a href="#" class="text-emerald-700 hover:text-emerald-900 underline decoration-2 decoration-emerald-400 font-semibold text-lg">
-                                Ver nuestra lista de deseos
-                            </a>
-                        </div>
-                        
-                        <div class="bg-gradient-to-r from-emerald-50 to-amber-50 border-2 border-emerald-300 rounded-lg p-8 text-center">
-                            <div class="inline-block bg-white rounded-full p-3 mb-4">
-                                <svg class="w-6 h-6 text-rose-600 fill-rose-600" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-2xl font-serif mb-3 text-emerald-900">Lluvia de Sobres</h3>
-                            <p class="text-amber-800 font-semibold">Habrá un buzón especial en la recepción</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Program -->
+    <section id="program">
+      <div class="section-label">Program</div>
+      <h2 class="section-title">Wedding day schedule</h2>
+      <p class="section-intro">
+        Here is the approximate schedule for the day. Times may vary slightly,
+        but this will help you plan your trip and outfit changes.
+      </p>
+
+      <div class="card">
+        <h3>June 20, 2026</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">3:30 PM</div>
+            <div class="timeline-desc">Guests arrive at the church.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">4:00 PM</div>
+            <div class="timeline-desc">Wedding mass and ceremony.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">5:30 PM</div>
+            <div class="timeline-desc">Transfer to reception venue.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">6:00 PM</div>
+            <div class="timeline-desc">Welcome drinks &amp; photos.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">7:30 PM</div>
+            <div class="timeline-desc">Dinner is served.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">9:30 PM</div>
+            <div class="timeline-desc">First dance &amp; cake.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">10:00 PM – late</div>
+            <div class="timeline-desc">Party &amp; dancing.</div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Recommendations Section -->
-    <section id="recommendations" class="py-20 px-6 bg-gradient-to-b from-white to-green-50">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16">
-                <svg class="w-12 h-12 mx-auto mb-4 text-amber-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                </svg>
-                <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Para Invitados de Fuera</p>
-                <h2 class="text-5xl font-serif text-amber-900">
-                    Hospedaje y Visitas
-                </h2>
-                <div class="flex items-center justify-center gap-3 mt-6">
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
-                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
-                </div>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white border-4 border-emerald-200 rounded-xl shadow-xl p-10">
-                    <div class="text-center mb-8">
-                        <div class="inline-block bg-gradient-to-br from-emerald-100 to-amber-100 rounded-full p-4 mb-4">
-                            <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-3xl font-serif text-emerald-900">Alojamiento</h3>
-                        <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto mt-4 rounded"></div>
-                    </div>
-                    
-                    <div class="space-y-6">
-                        <div class="bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-600 rounded-lg p-6">
-                            <h4 class="text-xl font-serif text-emerald-900 mb-2">Hotel Boutique Centro</h4>
-                            <p class="text-amber-800 mb-1 font-semibold">A 10 minutos de los eventos</p>
-                            <p class="text-emerald-700 text-sm">Teléfono: (555) 123-4567</p>
-                        </div>
-                        <div class="bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-600 rounded-lg p-6">
-                            <h4 class="text-xl font-serif text-emerald-900 mb-2">Grand Hotel Plaza</h4>
-                            <p class="text-amber-800 mb-1 font-semibold">A 15 minutos de los eventos</p>
-                            <p class="text-emerald-700 text-sm">Teléfono: (555) 987-6543</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- Hotel & Activities -->
+    <section id="stay">
+      <div class="section-label">Stay &amp; Activities</div>
+      <h2 class="section-title">Where to stay &amp; what to do</h2>
+      <p class="section-intro">
+        We are delighted that you are travelling to be with us. Here are some
+        hotel suggestions and activities nearby for the weekend.
+      </p>
 
-                <div class="bg-white border-4 border-amber-200 rounded-xl shadow-xl p-10">
-                    <div class="text-center mb-8">
-                        <div class="inline-block bg-gradient-to-br from-amber-100 to-emerald-100 rounded-full p-4 mb-4">
-                            <svg class="w-8 h-8 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-3xl font-serif text-amber-900">Sitios de Interés</h3>
-                        <div class="w-16 h-1 bg-gradient-to-r from-amber-500 to-emerald-500 mx-auto mt-4 rounded"></div>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <div class="bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-500 rounded-lg p-4">
-                            <p class="text-emerald-900 font-semibold">Centro Histórico</p>
-                        </div>
-                        <div class="bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-500 rounded-lg p-4">
-                            <p class="text-emerald-900 font-semibold">Museo de Arte Contemporáneo</p>
-                        </div>
-                        <div class="bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-500 rounded-lg p-4">
-                            <p class="text-emerald-900 font-semibold">Mercado de Artesanías</p>
-                        </div>
-                        <div class="bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-500 rounded-lg p-4">
-                            <p class="text-emerald-900 font-semibold">Parque Natural La Sierra</p>
-                        </div>
-                        <div class="bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-500 rounded-lg p-4">
-                            <p class="text-emerald-900 font-semibold">Zona Gastronómica del Barrio Viejo</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-20 px-6 bg-gradient-to-b from-green-50 to-amber-50">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <svg class="w-12 h-12 mx-auto mb-4 text-rose-600 fill-rose-600" viewBox="0 0 24 24">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                </svg>
-                <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Momentos Especiales</p>
-                <h2 class="text-5xl font-serif text-amber-900">
-                    Nuestra Historia de Amor
-                </h2>
-                <div class="flex items-center justify-center gap-3 mt-6">
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
-                    <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    </svg>
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/30"></div>
-                    <svg class="w-16 h-16 text-emerald-600 opacity-30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                </div>
-                <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/30"></div>
-                    <svg class="w-16 h-16 text-emerald-600 opacity-30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                </div>
-                <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/30"></div>
-                    <svg class="w-16 h-16 text-emerald-600 opacity-30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                </div>
-                <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/30"></div>
-                    <svg class="w-16 h-16 text-emerald-600 opacity-30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                </div>
-                <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/30"></div>
-                    <svg class="w-16 h-16 text-emerald-600 opacity-30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                </div>
-                <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/30"></div>
-                    <svg class="w-16 h-16 text-emerald-600 opacity-30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                </div>
-                <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/30"></div>
-                    <svg class="w-16 h-16 text-emerald-600 opacity-30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                </div>
-                <div class="aspect-square border-4 border-emerald-300 bg-gradient-to-br from-amber-100 to-green-100 rounded-lg shadow-lg flex items-center justify-center hover:scale-105 transition-transform relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/30"></div>
-                    <svg class="w-16 h-16 text-emerald-600 opacity-30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                </div>
-            </div>
-            <p class="text-center text-amber-800 mt-10 italic text-lg font-semibold">
-                Colocar vuestras fotografías favoritas
-            </p>
-        </div>
-    </section>
-
-    <!-- Itinerary Section -->
-    <section id="itinerary" class="py-20 px-6 bg-gradient-to-b from-amber-50 to-white">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <svg class="w-12 h-12 mx-auto mb-4 text-emerald-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 6v6l4 2"/>
-                </svg>
-                <p class="text-xs uppercase tracking-widest text-emerald-800 mb-4 font-semibold">Cronograma</p>
-                <h2 class="text-5xl font-serif text-amber-900">
-                    Programa del Día
-                </h2>
-                <div class="flex items-center justify-center gap-3 mt-6">
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
-                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
-                </div>
-            </div>
-            
-            <div class="bg-white border-4 border-double border-emerald-300 rounded-xl shadow-2xl p-10 relative overflow-hidden">
-                <div class="space-y-8 relative z-10">
-                    <div class="flex items-start bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-600 rounded-lg p-6 shadow-md">
-                        <div class="min-w-[100px] mr-6 text-right">
-                            <p class="text-3xl font-serif text-emerald-900">4:00</p>
-                            <p class="text-xs uppercase tracking-wider text-amber-700 mt-1 font-semibold">PM</p>
-                        </div>
-                        <div class="flex-1 pt-2">
-                            <h3 class="text-2xl font-serif text-amber-900 mb-2">Ceremonia Religiosa</h3>
-                            <p class="text-emerald-800 font-semibold">Parroquia de San Miguel Arcángel</p>
-                        </div>
-                        <svg class="w-8 h-8 text-emerald-600 ml-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10"/>
-                        </svg>
-                    </div>
-                    
-                    <div class="flex items-start bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-600 rounded-lg p-6 shadow-md">
-                        <div class="min-w-[100px] mr-6 text-right">
-                            <p class="text-3xl font-serif text-amber-900">6:00</p>
-                            <p class="text-xs uppercase tracking-wider text-emerald-700 mt-1 font-semibold">PM</p>
-                        </div>
-                        <div class="flex-1 pt-2">
-                            <h3 class="text-2xl font-serif text-amber-900 mb-2">Cóctel de Recepción</h3>
-                            <p class="text-emerald-800 font-semibold">Jardines de Hacienda Los Olivos</p>
-                        </div>
-                        <svg class="w-8 h-8 text-amber-600 ml-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        </svg>
-                    </div>
-                    
-                    <div class="flex items-start bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-600 rounded-lg p-6 shadow-md">
-                        <div class="min-w-[100px] mr-6 text-right">
-                            <p class="text-3xl font-serif text-emerald-900">7:30</p>
-                            <p class="text-xs uppercase tracking-wider text-amber-700 mt-1 font-semibold">PM</p>
-                        </div>
-                        <div class="flex-1 pt-2">
-                            <h3 class="text-2xl font-serif text-amber-900 mb-2">Cena de Gala</h3>
-                            <p class="text-emerald-800 font-semibold">Salón Principal</p>
-                        </div>
-                        <svg class="w-8 h-8 text-emerald-600 ml-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10"/>
-                        </svg>
-                    </div>
-                    
-                    <div class="flex items-start bg-gradient-to-r from-amber-50 to-emerald-50 border-l-4 border-amber-600 rounded-lg p-6 shadow-md">
-                        <div class="min-w-[100px] mr-6 text-right">
-                            <p class="text-3xl font-serif text-amber-900">9:00</p>
-                            <p class="text-xs uppercase tracking-wider text-emerald-700 mt-1 font-semibold">PM</p>
-                        </div>
-                        <div class="flex-1 pt-2">
-                            <h3 class="text-2xl font-serif text-amber-900 mb-2">Vals de los Novios</h3>
-                            <p class="text-emerald-800 font-semibold">Apertura de Pista de Baile</p>
-                        </div>
-                        <svg class="w-8 h-8 text-rose-600 fill-rose-600 ml-4" stroke-width="1.5" viewBox="0 0 24 24">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                    </div>
-                    
-                    <div class="flex items-start bg-gradient-to-r from-emerald-50 to-amber-50 border-l-4 border-emerald-600 rounded-lg p-6 shadow-md">
-                        <div class="min-w-[100px] mr-6 text-right">
-                            <p class="text-3xl font-serif text-emerald-900">9:30</p>
-                            <p class="text-xs uppercase tracking-wider text-amber-700 mt-1 font-semibold">PM</p>
-                        </div>
-                        <div class="flex-1 pt-2">
-                            <h3 class="text-2xl font-serif text-amber-900 mb-2">Baile y Celebración</h3>
-                            <p class="text-emerald-800 font-semibold">¡A bailar hasta el amanecer!</p>
-                        </div>
-                        <svg class="w-8 h-8 text-amber-600 ml-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gradient-to-b from-emerald-900 to-emerald-950 text-white py-16 px-6 text-center relative overflow-hidden">
-        <div class="absolute top-10 left-10 opacity-10">
-            <svg class="w-32 h-32 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10"/>
-            </svg>
-        </div>
-        <div class="absolute bottom-10 right-10 opacity-10">
-            <svg class="w-32 h-32 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-            </svg>
-        </div>
-        
-        <div class="relative z-10">
-            <div class="flex items-center justify-center gap-3 mb-6">
-                <div class="w-16 h-px bg-amber-400"></div>
-                <svg class="w-8 h-8 text-rose-400 fill-rose-400" viewBox="0 0 24 24">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                </svg>
-                <div class="w-16 h-px bg-amber-400"></div>
-            </div>
-            
-            <p class="text-4xl font-serif mb-4 text-amber-100">
-                María & Juan
-            </p>
-            <p class="text-amber-300 mb-2 tracking-wide text-lg">15 de Junio de 2025</p>
-            
-            <div class="flex items-center justify-center gap-3 my-8">
-                <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                </svg>
-                <div class="w-12 h-px bg-amber-400"></div>
-                <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                </svg>
-                <div class="w-12 h-px bg-amber-400"></div>
-                <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                </svg>
-            </div>
-            
-            <p class="text-emerald-200 text-lg italic">
-                Será un honor celebrar este día tan especial con vosotros
-            </p>
-        </div>
-    </footer>
-    
-    <div class="h-2 bg-gradient-to-r from-amber-700 via-emerald-700 to-amber-700"></div>
-
-    <script>
-        // Countdown Timer
-        function updateCountdown() {
-            const weddingDate = new Date('2025-06-15T16:00:00').getTime();
-            const now = new Date().getTime();
-            const difference = weddingDate - now;
-            
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
-        }
-        
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    </script>
-</body>
-</html>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Hotel suggestions</h3>
+          <ul class="details-list">
+            <li>
+              <span class="details-label">Hotel Lakeview</span> – 5 min from the
+              reception, special “Ana &amp; Luis Wedding” rate.
+            </li>
+            <li>
