@@ -1,1061 +1,917 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Developer Mandays Timeline Generator</title>
-
-  <!-- XLSX -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
-
+  <title>Myrna & Tenho — 25.04.2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
   <style>
-    :root{
-      --bg1:#667eea; --bg2:#764ba2;
-      --card:#ffffff; --muted:#718096; --text:#1a202c;
-      --border:#e2e8f0; --border2:#cbd5e0;
-      --primary:#667eea; --primary2:#5568d3;
-      --success:#48bb78; --success2:#38a169;
-      --danger:#f56565; --danger2:#e53e3e;
-      --soft:#f7fafc; --soft2:#f0f4ff;
-      --focus: 0 0 0 3px rgba(102,126,234,.25);
-      --shadow: 0 20px 60px rgba(0,0,0,.3);
-      --shadow2: 0 8px 24px rgba(0,0,0,.12);
-      --radius: 16px;
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f2f1ea;
+      --warm-white: #f6f5ee;
+      --gold: #7a7d3a;        /* olive — main accent */
+      --gold-light: #a4a760;  /* lighter olive */
+      --dark: #252410;        /* deep olive-black */
+      --brown: #4a4a1e;       /* dark olive for body text */
+      --blush: #e8cdd2;       /* rose blush for photo bg */
+      --env: #d4d5a0;         /* olive envelope body */
+      --env-dark: #b8ba78;    /* deeper olive fold */
+      --env-shadow: #9a9c58;  /* shadow fold */
+      --burgundy: #6e2535;    /* burgundy/wine */
+      --rose: #b8707a;        /* medium rose */
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
-      padding: 40px 20px;
-      color: var(--text);
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 36px;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.6;
     }
 
-    header {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 32px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      line-height: 1.15;
-    }
-
-    .subtitle {
-      margin: 10px 0 0 0;
-      color: var(--muted);
-      font-size: 16px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      background: var(--soft);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: #4a5568;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .grid {
-      display: grid;
-      gap: 18px;
-    }
-
-    .layout-selector,
-    .config-section {
-      background: var(--soft);
-      border-radius: 12px;
-      padding: 22px;
-      border: 2px solid var(--border);
-    }
-
-    .section-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #2d3748;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 14px 0;
-    }
-
-    .layout-options {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
-      margin-top: 12px;
-    }
-
-    .layout-card {
-      background: var(--card);
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-      cursor: pointer;
-      transition: transform .15s, box-shadow .15s, border-color .15s, background .15s;
-      user-select: none;
-      outline: none;
-    }
-
-    .layout-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(102, 126, 234, .28);
-    }
-
-    .layout-card.selected {
-      border-color: var(--primary);
-      background: var(--soft2);
-    }
-
-    .layout-card:focus-visible {
-      box-shadow: var(--shadow2), var(--focus);
-    }
-
-    .layout-title {
-      font-weight: 700;
-      font-size: 16px;
-      margin-bottom: 6px;
-      color: #2d3748;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .layout-description {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .layout-example {
-      margin-top: 10px;
-      padding: 10px 12px;
-      background: var(--soft);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size: 12px;
-      color: #4a5568;
-      overflow-x: auto;
-      white-space: pre;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      border: 1px solid rgba(0,0,0,.06);
-    }
-    .badge-recommended { background: var(--success); color: #fff; }
-
-    .input-group {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-bottom: 12px;
-    }
-
-    .input-wrapper {
+    /* ═══════════════════════════════
+       ENVELOPE SCREEN
+    ═══════════════════════════════ */
+    #envelope-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      min-width: 0;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      background:
+        radial-gradient(ellipse 100% 70% at 50% 120%, rgba(122,125,58,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 15% 10%, rgba(110,37,53,0.07) 0%, transparent 50%),
+        var(--warm-white);
+      transition: opacity 0.9s ease, visibility 0.9s ease;
     }
 
-    label { font-size: 13px; font-weight: 700; color: #4a5568; }
+    #envelope-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-    input[type="text"], input[type="number"], input[type="month"] {
-      padding: 10px 12px;
-      border: 2px solid var(--border2);
-      border-radius: 10px;
-      font-size: 14px;
-      transition: border-color .15s, box-shadow .15s;
-      background: #fff;
+    .env-intro {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--brown);
+      font-weight: 400;
+      margin-bottom: 3.5rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.8s ease forwards;
+    }
+
+    /* ── SCENE — padding-top creates the space photos slide up into ── */
+    .env-scene {
+      position: relative;
+      width: min(400px, 86vw);
+      padding-top: min(260px, 56vw);
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeUp 1.4s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    /* ── PHOTOS — absolutely positioned in the padding area above the envelope ── */
+    .photos-row {
+      position: absolute;
+      top: 0;
+      left: 0; right: 0;
+      height: min(260px, 56vw);
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 0 8px 16px;
+      /* start: tucked below, hidden behind the envelope top edge */
+      transform: translateY(85%);
+      opacity: 0;
+      transition:
+        transform 1s cubic-bezier(0.34, 1.2, 0.64, 1) 0.4s,
+        opacity   0.01s linear 0.4s; /* snap visible the moment motion starts */
+    }
+
+    .photos-row.risen {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .photo-card {
+      flex: 1;
+      max-width: 32%;
+      aspect-ratio: 3 / 4;
+      border-radius: 3px;
+      overflow: hidden;
+      border: 4px solid white;
+      background: var(--blush);
+      box-shadow: 0 10px 28px rgba(26,22,18,0.28);
+    }
+
+    .photo-card:nth-child(1) { transform: rotate(-5deg); }
+    .photo-card:nth-child(2) { transform: rotate(0deg);  }
+    .photo-card:nth-child(3) { transform: rotate(5deg);  }
+
+    .photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(145deg, #e8d0d4, #c9a0aa);
+      color: var(--brown);
+    }
+
+    .photo-placeholder svg { width: 26px; height: 26px; fill: var(--brown); opacity: 0.35; }
+
+    .photo-placeholder span {
+      font-size: 0.52rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      text-align: center;
+      padding: 0 0.4rem;
+    }
+
+    /* ── ENVELOPE BOX ── */
+    .envelope-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.618 / 1;
+    }
+
+    /* Envelope body */
+    .env-body {
+      position: absolute;
+      inset: 0;
+      background: var(--env);
+      border-radius: 6px;
+      box-shadow:
+        0 24px 64px rgba(26,22,18,0.22),
+        0 6px 18px rgba(26,22,18,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    /* Side fold lines */
+    .env-body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom right, transparent 49.5%, var(--env-shadow) 49.5%, var(--env-shadow) 50.5%, transparent 50.5%),
+        linear-gradient(to bottom left,  transparent 49.5%, var(--env-shadow) 49.5%, var(--env-shadow) 50.5%, transparent 50.5%);
+      opacity: 0.3;
+      border-radius: 6px;
+    }
+
+    /* Bottom fold triangle */
+    .env-body::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 58%;
+      background: var(--env-dark);
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      opacity: 0.45;
+      border-radius: 0 0 6px 6px;
+    }
+
+    /* ── WAX SEAL ── */
+    .seal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 36% 32%, #a83a4a, #4a1520);
+      box-shadow:
+        0 6px 20px rgba(74,21,32,0.6),
+        0 2px 5px rgba(0,0,0,0.35),
+        inset 0 2px 3px rgba(255,255,255,0.2),
+        inset 0 -3px 6px rgba(0,0,0,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+    }
+
+    .seal::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .seal-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: rgba(255,238,215,0.92);
+      letter-spacing: -0.04em;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      user-select: none;
+    }
+
+    .env-scene:not(.opened) .seal:hover {
+      transform: translate(-50%, -50%) scale(1.08);
+      box-shadow:
+        0 8px 28px rgba(74,21,32,0.7),
+        0 2px 5px rgba(0,0,0,0.35),
+        inset 0 2px 3px rgba(255,255,255,0.2),
+        inset 0 -3px 6px rgba(0,0,0,0.35);
+    }
+
+    .env-scene.opened .seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.5) rotate(15deg);
+      pointer-events: none;
+    }
+
+    /* ── PROMPT ── */
+    .env-prompt {
+      margin-top: 2.8rem;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1s 2s ease forwards;
+      transition: opacity 0.3s ease;
+    }
+
+    .env-prompt.hide { opacity: 0 !important; pointer-events: none; }
+
+    .env-prompt span {
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--brown);
+      font-weight: 400;
+    }
+
+    .dot-pulse {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      margin: 0 0.5rem;
+      vertical-align: middle;
+      animation: pulseDot 1.6s 2s ease-in-out infinite;
+    }
+
+    /* ── SCROLL CTA ── */
+    .scroll-cta {
+      margin-top: 2rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      pointer-events: none;
+    }
+
+    .scroll-cta.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .scroll-cta button {
+      background: none;
+      border: 1px solid var(--burgundy);
+      color: var(--burgundy);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+      font-weight: 400;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .scroll-cta button:hover {
+      background: var(--burgundy);
+      color: var(--warm-white);
+    }
+
+    /* ═══════════════════════════════
+       MAIN CONTENT
+    ═══════════════════════════════ */
+    #main-content {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    #main-content.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(122,125,58,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 20%, rgba(110,37,53,0.07) 0%, transparent 50%),
+        var(--warm-white);
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='400' height='600' viewBox='0 0 400 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%237a7d3a' stroke-width='0.8' opacity='0.3'%3E%3Cpath d='M50 600 Q80 400 60 200 Q40 100 80 0'/%3E%3Cpath d='M60 500 Q30 450 10 380'/%3E%3Cpath d='M65 420 Q90 380 70 330'/%3E%3Cpath d='M58 350 Q20 310 30 260'/%3E%3Cpath d='M63 280 Q95 250 75 200'/%3E%3Cellipse cx='15' cy='370' rx='18' ry='12' transform='rotate(-20 15 370)'/%3E%3Cellipse cx='88' cy='320' rx='22' ry='14' transform='rotate(15 88 320)'/%3E%3Cellipse cx='22' cy='250' rx='16' ry='10' transform='rotate(-30 22 250)'/%3E%3Cellipse cx='92' cy='195' rx='20' ry='13' transform='rotate(10 92 195)'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      background-size: 280px auto;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='400' height='600' viewBox='0 0 400 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%237a7d3a' stroke-width='0.8' opacity='0.3'%3E%3Cpath d='M350 600 Q320 400 340 200 Q360 100 320 0'/%3E%3Cpath d='M340 500 Q370 450 390 380'/%3E%3Cpath d='M335 420 Q310 380 330 330'/%3E%3Cpath d='M342 350 Q380 310 370 260'/%3E%3Cellipse cx='385' cy='370' rx='18' ry='12' transform='rotate(20 385 370)'/%3E%3Cellipse cx='312' cy='320' rx='22' ry='14' transform='rotate(-15 312 320)'/%3E%3Cellipse cx='378' cy='250' rx='16' ry='10' transform='rotate(30 378 250)'/%3E%3Cellipse cx='308' cy='195' rx='20' ry='13' transform='rotate(-10 308 195)'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: 280px auto;
+    }
+
+    .hero-content { position: relative; text-align: center; }
+
+    .pre-title {
+      font-weight: 400;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .divider-line {
+      width: 60px; height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2rem;
+      opacity: 0;
+      animation: expand 1s 0.5s ease forwards;
+    }
+
+    .names {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 1.2s 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ampersand {
+      color: var(--burgundy);
+      font-size: 0.72em;
+      line-height: 1;
+      display: block;
+      text-align: center;
       width: 100%;
     }
 
-    input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: var(--focus);
+    .date-block {
+      margin: 2.5rem auto;
+      opacity: 0;
+      animation: fadeUp 1s 0.9s ease forwards;
     }
 
-    .list-item {
-      display: grid;
-      grid-template-columns: 2fr 1fr auto;
-      gap: 12px;
-      align-items: end;
-      background: #fff;
-      padding: 14px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      margin-bottom: 12px;
+    .date-text {
+      font-weight: 200;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--brown);
     }
 
-    .list-item.project {
-      grid-template-columns: 1fr auto;
+    .date-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      color: var(--dark);
+      letter-spacing: 0.08em;
+      line-height: 1.2;
     }
 
-    @media (max-width: 720px) {
-      .list-item { grid-template-columns: 1fr; }
-      header { flex-direction: column; align-items: start; }
-    }
-
-    button {
-      padding: 12px 16px;
-      border: none;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: transform .15s, box-shadow .15s, background .15s;
-      display: inline-flex;
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s 2s ease forwards;
+    }
+
+    .scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--brown);
+      font-weight: 400;
+    }
+
+    .scroll-arrow {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s 2s ease-in-out infinite;
+    }
+
+    section {
+      padding: 6rem 2rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--brown);
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .ornament {
+      width: 40px; height: 1px;
+      background: var(--gold);
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .body-text {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--brown);
+      font-weight: 300;
+    }
+
+    .sep {
+      text-align: center;
+      padding: 1rem 0;
+      color: var(--gold);
+      font-size: 1.2rem;
+      letter-spacing: 0.5em;
+      opacity: 0.6;
+    }
+
+    .details-section {
+      background: #272610;
+      color: var(--cream);
+      padding: 6rem 2rem;
+    }
+
+    .details-inner { max-width: 760px; margin: 0 auto; }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 560px) {
+      .details-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .detail-card { border-top: 1px solid rgba(122,125,58,0.4); padding-top: 1.5rem; }
+    .detail-card .label { font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-light); font-weight: 400; margin-bottom: 0.6rem; }
+    .detail-card .value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; font-style: italic; line-height: 1.3; color: var(--cream); }
+    .detail-card .sub { font-size: 0.8rem; color: rgba(240,243,239,0.5); margin-top: 0.4rem; line-height: 1.6; }
+
+    .time-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+      margin-top: 0.9rem;
+    }
+    .time-row + .time-row { margin-top: 0.5rem; }
+    .time-hour {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
       white-space: nowrap;
     }
-
-    button:focus-visible { outline: none; box-shadow: var(--focus); }
-
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: var(--primary2); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(102,126,234,.35); }
-
-    .btn-success { background: var(--success); color: #fff; font-size: 15px; padding: 13px 18px; }
-    .btn-success:hover { background: var(--success2); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(72,187,120,.35); }
-
-    .btn-danger { background: var(--danger); color: #fff; padding: 10px 12px; }
-    .btn-danger:hover { background: var(--danger2); }
-
-    .btn-secondary { background: #e2e8f0; color: #4a5568; }
-    .btn-secondary:hover { background: #cbd5e0; }
-
-    .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 10px;
+    .time-desc {
+      font-size: 0.75rem;
+      color: rgba(240,243,239,0.55);
+      line-height: 1.4;
     }
 
-    .icon { width: 20px; height: 20px; flex: 0 0 auto; }
-
-    .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
-      gap: 8px;
-      margin-top: 10px;
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.8rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      font-weight: 300;
     }
 
-    .preview-item {
-      background: #fff;
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      color: #2d3748;
-      border: 1px solid var(--border);
+    .map-btn:hover { background: var(--gold); color: var(--dark); }
+    .map-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+    .countdown-section {
       text-align: center;
+      padding: 6rem 2rem;
+      background: var(--warm-white);
     }
 
-    .info-box {
-      background: #ebf8ff;
-      border: 2px solid #90cdf4;
-      border-radius: 12px;
-      padding: 18px;
-      margin-top: 22px;
-    }
+    .countdown-inner { max-width: 760px; margin: 0 auto; }
 
-    .info-box h3 { margin: 0 0 10px 0; color: #2c5282; font-size: 16px; }
-    .info-box ul { margin: 0; padding-left: 18px; color: #2d3748; font-size: 14px; line-height: 1.8; }
-    .info-box li { margin-bottom: 6px; }
-
-    .success-message, .error-message {
-      border-radius: 10px;
-      padding: 14px 16px;
-      margin-top: 14px;
-      display: none;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-    }
-
-    .success-message { background: #c6f6d5; border: 2px solid var(--success); color: #22543d; }
-    .error-message { background: #fed7d7; border: 2px solid var(--danger); color: #742a2a; }
-
-    .show { display: flex; }
-
-    .hint {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .top-actions {
+    .countdown-grid {
       display: flex;
-      gap: 10px;
-      align-items: center;
+      justify-content: center;
+      gap: clamp(1.5rem, 5vw, 4rem);
+      margin-top: 3rem;
       flex-wrap: wrap;
-      justify-content: flex-end;
     }
+
+    .count-item { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+
+    .count-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1;
+      min-width: 2ch;
+    }
+
+    .count-label { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--brown); font-weight: 400; }
+    .count-dot { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--gold-light); align-self: center; line-height: 1; margin-top: -0.5rem; }
+
+    .closing { text-align: center; padding: 6rem 2rem 8rem; }
+
+    .closing-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--brown);
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .closing-names { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 300; color: var(--dark); }
+    .closing-date { font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--brown); font-weight: 400; margin-top: 1rem; }
+    .floral-center { margin: 2rem auto; opacity: 0.5; }
+
+    footer {
+      background: #272610;
+      color: rgba(240,243,239,0.3);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes expand {
+      from { opacity: 0; width: 0; } to { opacity: 1; width: 60px; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; } 50% { opacity: 1; }
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.5); }
+    }
+    @keyframes wobble {
+      0%,100% { transform: translateY(0) rotate(0); }
+      25%      { transform: translateY(-4px) rotate(-1deg); }
+      75%      { transform: translateY(-2px) rotate(1deg); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <h1>
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-          </svg>
-          Developer Mandays Timeline Generator
-        </h1>
-        <p class="subtitle">Generate Excel timelines for allocations across months, developers, and projects.</p>
-      </div>
 
-      <div class="top-actions">
-        <span class="pill" id="countsPill">3 devs · 3 projects · 12 months</span>
-        <button class="btn-secondary" id="resetBtn" type="button" title="Reset to defaults">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 4v6h6M20 20v-6h-6M5 19a9 9 0 0114-6.708M19 5a9 9 0 00-14 6.708" />
-          </svg>
-          Reset
-        </button>
-      </div>
-    </header>
+<!-- ═════════════════════════════════
+     ENVELOPE SCREEN
+═════════════════════════════════ -->
+<div id="envelope-screen">
 
-    <div class="layout-selector" aria-labelledby="layoutTitle">
-      <div class="section-title" id="layoutTitle">
-        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-        </svg>
-        Choose your timeline layout
-      </div>
+  <p class="env-intro">Tu invitación de boda</p>
 
-      <div class="layout-options" id="layoutOptions" role="listbox" aria-label="Timeline layout">
-        <div class="layout-card selected" role="option" aria-selected="true" tabindex="0" data-layout="developer-timeline">
-          <div class="layout-title">Developer Timeline <span class="badge badge-recommended">Recommended</span></div>
-          <div class="layout-description">Each row is a developer, columns are months. Shows all projects per developer.</div>
-          <div class="layout-example">Dev1 | Jan-P1 | Jan-P2 | Feb-P1 | Feb-P2 | ...</div>
-        </div>
+  <div class="env-scene" id="envScene">
 
-        <div class="layout-card" role="option" aria-selected="false" tabindex="0" data-layout="project-timeline">
-          <div class="layout-title">Project Timeline</div>
-          <div class="layout-description">Each row is a project, columns are months. Shows all developers per project.</div>
-          <div class="layout-example">Proj1 | Jan-Dev1 | Jan-Dev2 | Feb-Dev1 | ...</div>
-        </div>
-
-        <div class="layout-card" role="option" aria-selected="false" tabindex="0" data-layout="matrix">
-          <div class="layout-title">Monthly Matrix View</div>
-          <div class="layout-description">Rows are developers, columns are projects, with separate sheets per month.</div>
-          <div class="layout-example">[Jan] Dev1 | P1 | P2 | P3&#10;[Feb] Dev1 | P1 | P2 | P3</div>
-        </div>
-
-        <div class="layout-card" role="option" aria-selected="false" tabindex="0" data-layout="heatmap">
-          <div class="layout-title">Utilization Heatmap</div>
-          <div class="layout-description">Rows are developers, columns are months. Shows utilization percentages.</div>
-          <div class="layout-example">Dev1 | 85% | 90% | 75% | 100% | ...</div>
-        </div>
-
-        <div class="layout-card" role="option" aria-selected="false" tabindex="0" data-layout="pivot">
-          <div class="layout-title">Project Capacity View</div>
-          <div class="layout-description">Total FTE per project per month (handy for capacity planning).</div>
-          <div class="layout-example">Project1 | Jan:2.5 | Feb:3.0 | Mar:2.8 | ...</div>
-        </div>
-
-        <div class="layout-card" role="option" aria-selected="false" tabindex="0" data-layout="gantt">
-          <div class="layout-title">Gantt-Style Timeline</div>
-          <div class="layout-description">Developer–project rows with month allocations for quick scanning.</div>
-          <div class="layout-example">Dev1-Proj1 | 5 | 8 | 10 | 12 | ...</div>
+    <!-- Envelope: body + photos + flap all stacked by z-index -->
+    <!-- Photos slide up from behind envelope on open -->
+    <div class="photos-row" id="photosRow">
+      <div class="photo-card">
+        <!--★ FOTO 1 — reemplaza con: <img src="foto1.jpg" alt="Myrna y Tenho"> -->
+        <div class="photo-placeholder">
+          <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          <span>Foto 1</span>
         </div>
       </div>
-
-      <p class="hint">
-        Tip: use arrow keys / Enter on the layout cards (keyboard-friendly now).
-      </p>
+      <div class="photo-card">
+        <!--★ FOTO 2 — reemplaza con: <img src="foto2.jpg" alt="Myrna y Tenho"> -->
+        <div class="photo-placeholder">
+          <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          <span>Foto 2</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <!--★ FOTO 3 — reemplaza con: <img src="foto3.jpg" alt="Myrna y Tenho"> -->
+        <div class="photo-placeholder">
+          <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          <span>Foto 3</span>
+        </div>
+      </div>
     </div>
 
-    <div class="config-section" aria-labelledby="devTitle">
-      <div class="section-title" id="devTitle">
-        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-        Developers
+    <div class="envelope-box">
+      <div class="env-body"></div>
+      <div class="seal" id="envSeal">
+        <span class="seal-text">M&T</span>
       </div>
-
-      <div id="developersList" aria-live="polite"></div>
-
-      <button class="btn-secondary" id="addDeveloperBtn" type="button">
-        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-        </svg>
-        Add developer
-      </button>
     </div>
 
-    <div class="config-section" aria-labelledby="projTitle">
-      <div class="section-title" id="projTitle">
-        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-        Projects
+  </div><!-- /.env-scene -->
+
+  <!-- Prompt -->
+  <div class="env-prompt" id="envPrompt">
+    <span><span class="dot-pulse"></span>Toca para abrir<span class="dot-pulse"></span></span>
+  </div>
+
+  <!-- Scroll CTA -->
+  <div class="scroll-cta" id="scrollCta">
+    <button onclick="revealMain()">Ver la invitación completa</button>
+  </div>
+
+</div><!-- /#envelope-screen -->
+
+
+<!-- ═════════════════════════════════
+     MAIN CONTENT
+═════════════════════════════════ -->
+<div id="main-content">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="pre-title">Nos casamos</p>
+      <div class="divider-line"></div>
+      <h1 class="names">
+        <span>Myrna</span>
+        <span class="ampersand">&amp;</span>
+        <span>Tenho</span>
+      </h1>
+      <div class="date-block">
+        <p class="date-text">Sábado</p>
+        <p class="date-number">25 · 04 · 2026</p>
       </div>
-
-      <div id="projectsList" aria-live="polite"></div>
-
-      <button class="btn-secondary" id="addProjectBtn" type="button">
-        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-        </svg>
-        Add project
-      </button>
     </div>
-
-    <div class="config-section" aria-labelledby="periodTitle">
-      <div class="section-title" id="periodTitle">
-        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        Timeline period
-      </div>
-
-      <div class="input-group">
-        <div class="input-wrapper">
-          <label for="startMonth">Start month</label>
-          <input type="month" id="startMonth" value="2025-01" />
-        </div>
-        <div class="input-wrapper">
-          <label for="endMonth">End month</label>
-          <input type="month" id="endMonth" value="2025-12" />
-        </div>
-      </div>
-
-      <div class="preview-grid" id="monthsPreview" aria-label="Months preview"></div>
-      <div class="error-message" id="errorMessage" role="alert" aria-live="assertive"></div>
-    </div>
-
-    <div class="button-group">
-      <button class="btn-success" id="generateBtn" type="button">
-        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        Generate Excel timeline
-      </button>
-
-      <button class="btn-primary" id="generateSampleBtn" type="button">
-        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        Generate with sample data
-      </button>
-    </div>
-
-    <div class="success-message" id="successMessage" role="status" aria-live="polite">
-      <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      <span>Excel timeline generated successfully!</span>
-    </div>
-
-    <div class="info-box">
-      <h3>📊 Timeline features</h3>
-      <ul>
-        <li><strong>Developer Timeline:</strong> track individual capacity across the year</li>
-        <li><strong>Project Timeline:</strong> resource planning per project</li>
-        <li><strong>Monthly Matrix:</strong> month-by-month 3D view</li>
-        <li><strong>Utilization Heatmap:</strong> quick utilization scan</li>
-        <li><strong>Project Capacity View:</strong> total FTE per project per month</li>
-        <li><strong>Gantt-Style:</strong> simple, readable timeline layout</li>
-      </ul>
+    <div class="scroll-hint">
+      <span>Descubre más</span>
+      <div class="scroll-arrow"></div>
     </div>
   </div>
 
-  <script>
-    "use strict";
-
-    // ---------- State ----------
-    const state = {
-      selectedLayout: "developer-timeline",
-      developers: [
-        { name: "Developer 1", availableMandays: 20 },
-        { name: "Developer 2", availableMandays: 20 },
-        { name: "Developer 3", availableMandays: 20 },
-      ],
-      projects: [
-        { name: "Project Alpha" },
-        { name: "Project Beta" },
-        { name: "Project Gamma" },
-      ],
-    };
-
-    // ---------- Helpers ----------
-    const $ = (id) => document.getElementById(id);
-
-    function showError(msg) {
-      const el = $("errorMessage");
-      el.textContent = msg;
-      el.classList.add("show");
-      setTimeout(() => el.classList.remove("show"), 4500);
-    }
-
-    function showSuccess() {
-      const el = $("successMessage");
-      el.classList.add("show");
-      setTimeout(() => el.classList.remove("show"), 2800);
-    }
-
-    function safeFilePart(s) {
-      return String(s || "")
-        .trim()
-        .replace(/[\\/:*?"<>|]+/g, "-")
-        .replace(/\s+/g, "_")
-        .slice(0, 80) || "Timeline";
-    }
-
-    function clamp(n, min, max) {
-      const x = Number(n);
-      if (!Number.isFinite(x)) return min;
-      return Math.min(max, Math.max(min, x));
-    }
-
-    function toMonthLabel(ym) {
-      // ym = "YYYY-MM"
-      const [y, m] = ym.split("-").map(Number);
-      const d = new Date(y, m - 1, 1);
-      return d.toLocaleString(undefined, { month: "short", year: "numeric" });
-    }
-
-    function getMonthsRange(start, end) {
-      if (!start || !end) return [];
-      const startDate = new Date(start + "-01T00:00:00");
-      const endDate = new Date(end + "-01T00:00:00");
-
-      if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) return [];
-      if (startDate > endDate) return [];
-
-      const months = [];
-      const current = new Date(startDate);
-      while (current <= endDate) {
-        const y = current.getFullYear();
-        const m = String(current.getMonth() + 1).padStart(2, "0");
-        months.push(`${y}-${m}`);
-        current.setMonth(current.getMonth() + 1);
-      }
-      return months;
-    }
-
-    function updateCountsPill() {
-      const months = getMonthsRange($("startMonth").value, $("endMonth").value);
-      $("countsPill").textContent = `${state.developers.length} devs · ${state.projects.length} projects · ${months.length} months`;
-    }
-
-    function validateInputs() {
-      const start = $("startMonth").value;
-      const end = $("endMonth").value;
-      const months = getMonthsRange(start, end);
-
-      if (!start || !end) return { ok: false, months: [], message: "Please select a start and end month." };
-      if (months.length === 0) return { ok: false, months: [], message: "Start month must be before (or equal to) end month." };
-
-      const badDev = state.developers.find((d) => !String(d.name).trim());
-      if (badDev) return { ok: false, months, message: "Every developer needs a name." };
-
-      const badProj = state.projects.find((p) => !String(p.name).trim());
-      if (badProj) return { ok: false, months, message: "Every project needs a name." };
-
-      return { ok: true, months, message: "" };
-    }
-
-    // ---------- Layout Selection (no inline onclick, keyboard-friendly) ----------
-    function setSelectedLayout(layout) {
-      state.selectedLayout = layout;
-
-      document.querySelectorAll(".layout-card").forEach((card) => {
-        const isSelected = card.dataset.layout === layout;
-        card.classList.toggle("selected", isSelected);
-        card.setAttribute("aria-selected", String(isSelected));
-      });
-    }
-
-    function wireLayoutCards() {
-      const cards = Array.from(document.querySelectorAll(".layout-card"));
-
-      cards.forEach((card, idx) => {
-        card.addEventListener("click", () => setSelectedLayout(card.dataset.layout));
-        card.addEventListener("keydown", (e) => {
-          const key = e.key;
-          if (key === "Enter" || key === " ") {
-            e.preventDefault();
-            setSelectedLayout(card.dataset.layout);
-          }
-          if (key === "ArrowRight" || key === "ArrowDown") {
-            e.preventDefault();
-            const next = cards[(idx + 1) % cards.length];
-            next.focus();
-          }
-          if (key === "ArrowLeft" || key === "ArrowUp") {
-            e.preventDefault();
-            const prev = cards[(idx - 1 + cards.length) % cards.length];
-            prev.focus();
-          }
-        });
-      });
-    }
-
-    // ---------- Renderers ----------
-    function renderDevelopers() {
-      const container = $("developersList");
-
-      container.innerHTML = state.developers
-        .map((dev, idx) => {
-          const removeBtn =
-            state.developers.length > 1
-              ? `<button class="btn-danger" type="button" data-action="remove-dev" data-idx="${idx}">Remove</button>`
-              : "";
-
-          return `
-            <div class="list-item">
-              <div class="input-wrapper" style="flex:2;">
-                <label for="dev-name-${idx}">Name</label>
-                <input id="dev-name-${idx}" type="text" value="${escapeHtml(dev.name)}" data-action="dev-name" data-idx="${idx}">
-              </div>
-              <div class="input-wrapper" style="flex:1;">
-                <label for="dev-md-${idx}">Available mandays / month</label>
-                <input id="dev-md-${idx}" type="number" min="0" value="${Number(dev.availableMandays) || 0}" data-action="dev-md" data-idx="${idx}">
-              </div>
-              ${removeBtn}
-            </div>
-          `;
-        })
-        .join("");
-
-      updateCountsPill();
-    }
-
-    function renderProjects() {
-      const container = $("projectsList");
-
-      container.innerHTML = state.projects
-        .map((proj, idx) => {
-          const removeBtn =
-            state.projects.length > 1
-              ? `<button class="btn-danger" type="button" data-action="remove-proj" data-idx="${idx}">Remove</button>`
-              : "";
-
-          return `
-            <div class="list-item project">
-              <div class="input-wrapper">
-                <label for="proj-name-${idx}">Project name</label>
-                <input id="proj-name-${idx}" type="text" value="${escapeHtml(proj.name)}" data-action="proj-name" data-idx="${idx}">
-              </div>
-              ${removeBtn}
-            </div>
-          `;
-        })
-        .join("");
-
-      updateCountsPill();
-    }
-
-    function updateMonthsPreview() {
-      const { ok, months, message } = validateInputs();
-      const container = $("monthsPreview");
-      container.innerHTML = months.map((m) => `<div class="preview-item">${escapeHtml(toMonthLabel(m))}</div>`).join("");
-
-      if (!ok) showError(message);
-      updateCountsPill();
-    }
-
-    // Basic HTML escaping for safe rendering of user inputs in templates.
-    function escapeHtml(str) {
-      return String(str ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    // ---------- CRUD ----------
-    function addDeveloper() {
-      state.developers.push({ name: `Developer ${state.developers.length + 1}`, availableMandays: 20 });
-      renderDevelopers();
-    }
-    function removeDeveloper(idx) {
-      state.developers.splice(idx, 1);
-      renderDevelopers();
-    }
-    function addProject() {
-      const nextLetter = String.fromCharCode(65 + state.projects.length);
-      state.projects.push({ name: `Project ${nextLetter}` });
-      renderProjects();
-    }
-    function removeProject(idx) {
-      state.projects.splice(idx, 1);
-      renderProjects();
-    }
-
-    function resetDefaults() {
-      state.selectedLayout = "developer-timeline";
-      state.developers = [
-        { name: "Developer 1", availableMandays: 20 },
-        { name: "Developer 2", availableMandays: 20 },
-        { name: "Developer 3", availableMandays: 20 },
-      ];
-      state.projects = [
-        { name: "Project Alpha" },
-        { name: "Project Beta" },
-        { name: "Project Gamma" },
-      ];
-      $("startMonth").value = "2025-01";
-      $("endMonth").value = "2025-12";
-      setSelectedLayout(state.selectedLayout);
-      renderDevelopers();
-      renderProjects();
-      updateMonthsPreview();
-    }
-
-    // ---------- Sample Data ----------
-    function sampleMandays() {
-      return Math.floor(Math.random() * 8) + 2; // 2..9
-    }
-
-    // ---------- Excel generation helpers ----------
-    function aoaSheetWithColumns(data, colWidths) {
-      const ws = XLSX.utils.aoa_to_sheet(data);
-      ws["!cols"] = colWidths.map((wch) => ({ wch }));
-      // Improve readability: wrap headers
-      if (ws["!ref"]) {
-        const range = XLSX.utils.decode_range(ws["!ref"]);
-        for (let C = range.s.c; C <= range.e.c; C++) {
-          const addr = XLSX.utils.encode_cell({ r: 0, c: C });
-          if (ws[addr]) {
-            ws[addr].s = ws[addr].s || {};
-            ws[addr].s.alignment = { wrapText: true, vertical: "center" };
-            ws[addr].s.font = { bold: true };
-          }
-        }
-      }
-      return ws;
-    }
-
-    // Note: SheetJS community build has limited styling support in some contexts,
-    // but column widths + header wrapping often still help.
-    function generateExcel(withSample) {
-      const v = validateInputs();
-      if (!v.ok) {
-        showError(v.message);
-        return;
-      }
-
-      if (!window.XLSX) {
-        showError("XLSX library not loaded yet. Try again in a moment.");
-        return;
-      }
-
-      const months = v.months;
-      const wb = XLSX.utils.book_new();
-
-      switch (state.selectedLayout) {
-        case "developer-timeline":
-          generateDeveloperTimeline(wb, months, withSample);
-          break;
-        case "project-timeline":
-          generateProjectTimeline(wb, months, withSample);
-          break;
-        case "matrix":
-          generateMatrixView(wb, months, withSample);
-          break;
-        case "heatmap":
-          generateHeatmap(wb, months, withSample);
-          break;
-        case "pivot":
-          generatePivotView(wb, months, withSample);
-          break;
-        case "gantt":
-          generateGanttView(wb, months, withSample);
-          break;
-        default:
-          showError("Unknown layout selected.");
-          return;
-      }
-
-      const fileName = `${safeFilePart("Developer_Timeline")}_${safeFilePart(state.selectedLayout)}${withSample ? "_Sample" : ""}.xlsx`;
-      XLSX.writeFile(wb, fileName);
-      showSuccess();
-    }
-
-    // ---------- Sheet generators ----------
-    function generateDeveloperTimeline(wb, months, withSample) {
-      const header = ["Developer", "Available/Mo"];
-      months.forEach((month) => {
-        state.projects.forEach((proj) => header.push(`${toMonthLabel(month)}\n${proj.name}`));
-        header.push(`${toMonthLabel(month)}\nTotal`);
-        header.push(`${toMonthLabel(month)}\nUtil%`);
-      });
-
-      const rows = state.developers.map((dev) => {
-        const row = [dev.name, Number(dev.availableMandays) || 0];
-
-        months.forEach(() => {
-          const values = state.projects.map(() => (withSample ? sampleMandays() : ""));
-          row.push(...values);
-
-          if (withSample) {
-            const total = values.reduce((a, b) => a + (Number(b) || 0), 0);
-            const avail = Number(dev.availableMandays) || 0;
-            const util = avail > 0 ? (total / avail) * 100 : 0;
-            row.push(total);
-            row.push(Number(util.toFixed(1)));
-          } else {
-            row.push("", "");
-          }
-        });
-
-        return row;
-      });
-
-      const data = [header, ...rows];
-      const colWidths = [18, 14, ...Array(header.length - 2).fill(12)];
-      const ws = aoaSheetWithColumns(data, colWidths);
-      XLSX.utils.book_append_sheet(wb, ws, "Developer Timeline");
-    }
-
-    function generateProjectTimeline(wb, months, withSample) {
-      const header = ["Project"];
-      months.forEach((month) => {
-        state.developers.forEach((dev) => header.push(`${toMonthLabel(month)}\n${dev.name}`));
-        header.push(`${toMonthLabel(month)}\nTotal`);
-      });
-
-      const rows = state.projects.map((proj) => {
-        const row = [proj.name];
-
-        months.forEach(() => {
-          const values = state.developers.map(() => (withSample ? sampleMandays() : ""));
-          row.push(...values);
-
-          if (withSample) {
-            const total = values.reduce((a, b) => a + (Number(b) || 0), 0);
-            row.push(total);
-          } else {
-            row.push("");
-          }
-        });
-
-        return row;
-      });
-
-      const data = [header, ...rows];
-      const colWidths = [22, ...Array(header.length - 1).fill(12)];
-      const ws = aoaSheetWithColumns(data, colWidths);
-      XLSX.utils.book_append_sheet(wb, ws, "Project Timeline");
-    }
-
-    function generateMatrixView(wb, months, withSample) {
-      months.forEach((month) => {
-        const header = ["Developer", ...state.projects.map((p) => p.name), "Total", "Remaining", "Util%"];
-
-        const rows = state.developers.map((dev) => {
-          const avail = Number(dev.availableMandays) || 0;
-
-          const vals = state.projects.map(() => (withSample ? sampleMandays() : ""));
-          const row = [dev.name, ...vals];
-
-          if (withSample) {
-            const total = vals.reduce((a, b) => a + (Number(b) || 0), 0);
-            const remaining = avail - total;
-            const util = avail > 0 ? (total / avail) * 100 : 0;
-            row.push(total, remaining, Number(util.toFixed(1)));
-          } else {
-            row.push("", "", "");
-          }
-
-          return row;
-        });
-
-        const data = [header, ...rows];
-        const colWidths = [18, ...Array(header.length - 1).fill(14)];
-        const ws = aoaSheetWithColumns(data, colWidths);
-
-        // Sheet names max 31 chars
-        const sheetName = safeFilePart(toMonthLabel(month)).slice(0, 31);
-        XLSX.utils.book_append_sheet(wb, ws, sheetName);
-      });
-    }
-
-    function generateHeatmap(wb, months, withSample) {
-      const header = ["Developer", "Avg Mandays", ...months.map(toMonthLabel), "Year Avg"];
-
-      const rows = state.developers.map((dev) => {
-        const row = [dev.name, Number(dev.availableMandays) || 0];
-
-        const utils = months.map(() => (withSample ? (Math.random() * 40 + 60) : ""));
-        row.push(...utils.map((x) => (x === "" ? "" : Number(x.toFixed(1)))));
-
-        if (withSample) {
-          const avg = utils.reduce((a, b) => a + (Number(b) || 0), 0) / utils.length;
-          row.push(Number(avg.toFixed(1)));
-        } else {
-          row.push("");
-        }
-
-        return row;
-      });
-
-      const data = [header, ...rows];
-      const colWidths = [18, 14, ...Array(header.length - 2).fill(12)];
-      const ws = aoaSheetWithColumns(data, colWidths);
-      XLSX.utils.book_append_sheet(wb, ws, "Utilization");
-    }
-
-    function generatePivotView(wb, months, withSample) {
-      const header = ["Project", ...months.map(toMonthLabel), "Avg FTE"];
-
-      const rows = state.projects.map((proj) => {
-        const row = [proj.name];
-        const ftes = months.map(() => (withSample ? (Math.random() * 2 + 0.5) : ""));
-        row.push(...ftes.map((x) => (x === "" ? "" : Number(x.toFixed(2)))));
-
-        if (withSample) {
-          const avg = ftes.reduce((a, b) => a + (Number(b) || 0), 0) / ftes.length;
-          row.push(Number(avg.toFixed(2)));
-        } else {
-          row.push("");
-        }
-        return row;
-      });
-
-      const data = [header, ...rows];
-      const colWidths = [24, ...Array(header.length - 1).fill(12)];
-      const ws = aoaSheetWithColumns(data, colWidths);
-      XLSX.utils.book_append_sheet(wb, ws, "Project Capacity");
-    }
-
-    function generateGanttView(wb, months, withSample) {
-      const header = ["Developer", "Project", ...months.map(toMonthLabel), "Total Mandays"];
-      const rows = [];
-
-      state.developers.forEach((dev) => {
-        state.projects.forEach((proj) => {
-          const vals = months.map(() => (withSample ? (Math.random() > 0.3 ? sampleMandays() : 0) : ""));
-          const row = [dev.name, proj.name, ...vals];
-
-          if (withSample) {
-            const total = vals.reduce((a, b) => a + (Number(b) || 0), 0);
-            row.push(total);
-          } else {
-            row.push("");
-          }
-
-          rows.push(row);
-        });
-      });
-
-      const data = [header, ...rows];
-      const colWidths = [18, 22, ...Array(header.length - 3).fill(10), 14];
-      const ws = aoaSheetWithColumns(data, colWidths);
-      XLSX.utils.book_append_sheet(wb, ws, "Gantt");
-    }
-
-    // ---------- Event delegation ----------
-    function wireEvents() {
-      // Inputs affecting months preview
-      $("startMonth").addEventListener("change", updateMonthsPreview);
-      $("endMonth").addEventListener("change", updateMonthsPreview);
-
-      // Developers list events
-      $("developersList").addEventListener("input", (e) => {
-        const t = e.target;
-        if (!(t instanceof HTMLInputElement)) return;
-        const idx = Number(t.dataset.idx);
-        const action = t.dataset.action;
-
-        if (action === "dev-name") state.developers[idx].name = t.value;
-        if (action === "dev-md") state.developers[idx].availableMandays = clamp(t.value, 0, 9999);
-        updateCountsPill();
-      });
-
-      $("developersList").addEventListener("click", (e) => {
-        const btn = e.target.closest("button");
-        if (!btn) return;
-        if (btn.dataset.action === "remove-dev") removeDeveloper(Number(btn.dataset.idx));
-      });
-
-      // Projects list events
-      $("projectsList").addEventListener("input", (e) => {
-        const t = e.target;
-        if (!(t instanceof HTMLInputElement)) return;
-        const idx = Number(t.dataset.idx);
-        const action = t.dataset.action;
-
-        if (action === "proj-name") state.projects[idx].name = t.value;
-        updateCountsPill();
-      });
-
-      $("projectsList").addEventListener("click", (e) => {
-        const btn = e.target.closest("button");
-        if (!btn) return;
-        if (btn.dataset.action === "remove-proj") removeProject(Number(btn.dataset.idx));
-      });
-
-      // Add buttons
-      $("addDeveloperBtn").addEventListener("click", addDeveloper);
-      $("addProjectBtn").addEventListener("click", addProject);
-
-      // Generate buttons
-      $("generateBtn").addEventListener("click", () => generateExcel(false));
-      $("generateSampleBtn").addEventListener("click", () => generateExcel(true));
-
-      // Reset
-      $("resetBtn").addEventListener("click", resetDefaults);
-    }
-
-    // ---------- Init ----------
-    document.addEventListener("DOMContentLoaded", () => {
-      wireLayoutCards();
-      wireEvents();
-      setSelectedLayout(state.selectedLayout);
-      renderDevelopers();
-      renderProjects();
-      updateMonthsPreview();
+  <!-- INVITACIÓN -->
+  <section>
+    <div class="reveal">
+      <p class="section-label"><span class="ornament"></span> Con amor <span class="ornament"></span></p>
+      <h2 class="section-title">Querida familia y amigos,</h2>
+      <p class="body-text">
+        Con el corazón lleno de alegría, tenemos el honor de invitarles a celebrar con nosotros el inicio de nuestra vida juntos. Será una tarde llena de amor, música y momentos que guardaremos para siempre.
+      </p>
+      <br>
+      <p class="body-text">
+        Su presencia es el regalo más grande que podemos recibir en este día tan especial.
+      </p>
+    </div>
+  </section>
+
+  <div class="sep">✦ ✦ ✦</div>
+
+  <!-- DETALLES -->
+  <div class="details-section">
+    <div class="details-inner">
+      <div class="reveal">
+        <p class="section-label" style="color:var(--gold-light)">Detalles de la celebración</p>
+        <h2 class="section-title" style="color:var(--cream)">Todo lo que necesitas saber</h2>
+      </div>
+      <div class="details-grid reveal">
+        <div class="detail-card">
+          <p class="label">Fecha</p>
+          <p class="value">Sábado 25 de Abril, 2026</p>
+          <div class="time-row">
+            <span class="time-hour">4:00 PM</span>
+            <span class="time-desc">Misa</span>
+          </div>
+          <div class="time-row">
+            <span class="time-hour">5:45 PM</span>
+            <span class="time-desc">Brindis · Ex-Hacienda San Cayetano</span>
+          </div>
+        </div>
+        <div class="detail-card">
+          <p class="label">Novios</p>
+          <p class="value">Myrna del Carmen Villaseñor Aguirre</p>
+          <p class="value" style="margin-top:0.5rem">Tenho Juan Saavedra Rautiainen</p>
+        </div>
+        <div class="detail-card" style="grid-column:1/-1">
+          <p class="label">Lugar</p>
+          <p class="value">Consultar ubicación</p>
+          <p class="sub">Haz clic en el botón para ver la dirección exacta en Google Maps y planear tu llegada con anticipación.</p>
+          <a class="map-btn" href="https://maps.app.goo.gl/epyY4Vkc6UiFmBZk6" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-section">
+    <div class="countdown-inner">
+      <div class="reveal">
+        <p class="section-label"><span class="ornament"></span> Faltan <span class="ornament"></span></p>
+        <h2 class="section-title">El día se acerca</h2>
+      </div>
+      <div class="countdown-grid reveal">
+        <div class="count-item"><span class="count-number" id="days">--</span><span class="count-label">Días</span></div>
+        <div class="count-dot">·</div>
+        <div class="count-item"><span class="count-number" id="hours">--</span><span class="count-label">Horas</span></div>
+        <div class="count-dot">·</div>
+        <div class="count-item"><span class="count-number" id="minutes">--</span><span class="count-label">Minutos</span></div>
+        <div class="count-dot">·</div>
+        <div class="count-item"><span class="count-number" id="seconds">--</span><span class="count-label">Segundos</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div class="reveal">
+      <svg class="floral-center" width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#7a7d3a" stroke-width="1">
+          <path d="M10 20 Q30 5 60 20 Q90 35 110 20"/>
+          <path d="M10 20 Q30 35 60 20 Q90 5 110 20"/>
+          <circle cx="60" cy="20" r="3" fill="#7a7d3a"/>
+          <circle cx="10" cy="20" r="2" fill="#7a7d3a"/>
+          <circle cx="110" cy="20" r="2" fill="#7a7d3a"/>
+          <path d="M40 12 Q45 8 50 12" stroke-width="0.8"/>
+          <path d="M70 12 Q75 8 80 12" stroke-width="0.8"/>
+          <path d="M40 28 Q45 32 50 28" stroke-width="0.8"/>
+          <path d="M70 28 Q75 32 80 28" stroke-width="0.8"/>
+        </g>
+      </svg>
+      <p class="closing-quote">"El amor no es mirarse el uno al otro, sino mirar juntos en la misma dirección."</p>
+      <p class="closing-names">Myrna & Tenho</p>
+      <p class="closing-date">25 · Abril · 2026</p>
+    </div>
+  </div>
+
+  <footer><p>Con amor · Myrna & Tenho · 25.04.2026</p></footer>
+</div>
+
+
+<script>
+  /* ── ENVELOPE OPEN SEQUENCE ── */
+  const scene     = document.getElementById('envScene');
+  const prompt    = document.getElementById('envPrompt');
+  const cta       = document.getElementById('scrollCta');
+  const seal      = document.getElementById('envSeal');
+  const photosRow = document.getElementById('photosRow');
+  let opened = false;
+
+  scene.addEventListener('click', openEnvelope);
+
+  function openEnvelope() {
+    if (opened) return;
+    opened = true;
+
+    // Hide prompt
+    prompt.classList.add('hide');
+
+    // Step 1: seal shatters
+    seal.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    seal.style.opacity = '0';
+    seal.style.transform = 'translate(-50%, -50%) scale(0.4) rotate(20deg)';
+
+    // Step 2: photos slide up out of envelope
+    setTimeout(() => {
+      photosRow.classList.add('risen');
+    }, 300);
+
+    // Step 3: show CTA after photos settle
+    setTimeout(() => cta.classList.add('show'), 1600);
+  }
+
+  /* ── REVEAL MAIN ── */
+  function revealMain() {
+    document.getElementById('envelope-screen').classList.add('hidden');
+    const main = document.getElementById('main-content');
+    main.classList.add('visible');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  }
+
+  /* ── COUNTDOWN ── */
+  function tick() {
+    const diff = new Date('2026-04-25T00:00:00') - new Date();
+    if (diff <= 0) return;
+    document.getElementById('days').textContent    = Math.floor(diff / 86400000);
+    document.getElementById('hours').textContent   = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+    document.getElementById('minutes').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+    document.getElementById('seconds').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ── SCROLL REVEAL ── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
     });
-  </script>
+  }, { threshold: 0.15 });
+</script>
 </body>
 </html>
