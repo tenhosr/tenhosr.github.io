@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -158,100 +157,13 @@
     .envelope-box {
       position: relative;
       width: 100%;
-      aspect-ratio: 1.618 / 1;
     }
 
-    /* Envelope body */
-    .env-body {
-      position: absolute;
-      inset: 0;
-      background: var(--env);
-      border-radius: 6px;
-      box-shadow:
-        0 24px 64px rgba(26,22,18,0.22),
-        0 6px 18px rgba(26,22,18,0.1),
-        inset 0 1px 0 rgba(255,255,255,0.5);
-    }
-
-    /* Side fold lines */
-    .env-body::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom right, transparent 49.5%, var(--env-shadow) 49.5%, var(--env-shadow) 50.5%, transparent 50.5%),
-        linear-gradient(to bottom left,  transparent 49.5%, var(--env-shadow) 49.5%, var(--env-shadow) 50.5%, transparent 50.5%);
-      opacity: 0.3;
-      border-radius: 6px;
-    }
-
-    /* Bottom fold triangle */
-    .env-body::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 58%;
-      background: var(--env-dark);
-      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
-      opacity: 0.45;
-      border-radius: 0 0 6px 6px;
-    }
-
-    /* ── WAX SEAL ── */
-    .seal {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 20;
-      width: 76px;
-      height: 76px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 36% 32%, #a83a4a, #4a1520);
-      box-shadow:
-        0 6px 20px rgba(74,21,32,0.6),
-        0 2px 5px rgba(0,0,0,0.35),
-        inset 0 2px 3px rgba(255,255,255,0.2),
-        inset 0 -3px 6px rgba(0,0,0,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
-    }
-
-    .seal::before {
-      content: '';
-      position: absolute;
-      inset: 6px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.18);
-    }
-
-    .seal-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.4rem;
-      font-weight: 400;
-      color: rgba(255,238,215,0.92);
-      letter-spacing: -0.04em;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-      user-select: none;
-    }
-
-    .env-scene:not(.opened) .seal:hover {
-      transform: translate(-50%, -50%) scale(1.08);
-      box-shadow:
-        0 8px 28px rgba(74,21,32,0.7),
-        0 2px 5px rgba(0,0,0,0.35),
-        inset 0 2px 3px rgba(255,255,255,0.2),
-        inset 0 -3px 6px rgba(0,0,0,0.35);
-    }
-
-    .env-scene.opened .seal {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.5) rotate(15deg);
-      pointer-events: none;
+    .envelope-box svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 22px 48px rgba(26,22,18,0.22)) drop-shadow(0 6px 14px rgba(26,22,18,0.12));
     }
 
     /* ── PROMPT ── */
@@ -565,8 +477,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      margin-top: 1.5rem;
-      padding: 0.75rem 1.8rem;
+      margin-top: 1rem;
+      padding: 0.6rem 1.4rem;
       border: 1px solid var(--gold);
       color: var(--gold);
       text-decoration: none;
@@ -579,6 +491,34 @@
 
     .map-btn:hover { background: var(--gold); color: var(--dark); }
     .map-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+    .location-block { margin-top: 1.6rem; }
+    .location-block:first-of-type { margin-top: 1rem; }
+
+    .venue-tag {
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 0.35rem;
+    }
+
+    .venue-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.3;
+    }
+
+    .venue-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(122,125,58,0.25);
+      margin: 1.4rem 0;
+    }
 
     .countdown-section {
       text-align: center;
@@ -611,6 +551,64 @@
     .count-dot { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--gold-light); align-self: center; line-height: 1; margin-top: -0.5rem; }
 
     .closing { text-align: center; padding: 6rem 2rem 8rem; }
+
+    /* ── RSVP ── */
+    .rsvp-section {
+      padding: 6rem 2rem;
+      background: var(--warm-white);
+      text-align: center;
+    }
+
+    .rsvp-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .rsvp-frame-wrap {
+      margin-top: 0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .rsvp-frame-wrap iframe {
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      box-shadow: 0 8px 32px rgba(26,22,18,0.1);
+    }
+
+    .rsvp-placeholder {
+      background: var(--cream);
+      border: 1px dashed rgba(122,125,58,0.4);
+      border-radius: 6px;
+      padding: 3.5rem 2rem;
+      color: var(--brown);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .rsvp-placeholder svg { opacity: 0.3; }
+
+    .rsvp-placeholder-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--dark);
+    }
+
+    .rsvp-placeholder-sub {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: var(--brown);
+      opacity: 0.6;
+      max-width: 420px;
+    }
+
+
 
     .closing-quote {
       font-family: 'Cormorant Garamond', serif;
@@ -706,10 +704,120 @@
     </div>
 
     <div class="envelope-box">
-      <div class="env-body"></div>
-      <div class="seal" id="envSeal">
-        <span class="seal-text">M&T</span>
-      </div>
+      <!--
+        SVG envelope — 500 x 309 viewBox (golden ratio).
+        All shading done with SVG gradients to simulate real paper folds.
+        No filters, no grain — pure geometry and light.
+      -->
+      <svg viewBox="0 0 500 309" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+          <!-- Ivory paper base gradient: warm light top-left, slight amber shadow bottom-right -->
+          <linearGradient id="paperBase" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#faf5e8"/>
+            <stop offset="40%"  stop-color="#f5edda"/>
+            <stop offset="100%" stop-color="#e8dcc4"/>
+          </linearGradient>
+
+          <!-- Left side flap shading -->
+          <linearGradient id="leftFlap" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#ddd0b0" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#f5edda" stop-opacity="0"/>
+          </linearGradient>
+
+          <!-- Right side flap shading -->
+          <linearGradient id="rightFlap" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%"   stop-color="#ddd0b0" stop-opacity="0.65"/>
+            <stop offset="100%" stop-color="#f5edda" stop-opacity="0"/>
+          </linearGradient>
+
+          <!-- Bottom flap: darker crease near fold point -->
+          <linearGradient id="bottomFlap" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%"   stop-color="#c8b88a" stop-opacity="0.5"/>
+            <stop offset="60%"  stop-color="#e0d4b4" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#f0e8d0" stop-opacity="0.1"/>
+          </linearGradient>
+
+          <!-- Top flap (closed): warm ivory slightly cooler than body -->
+          <linearGradient id="topFlap" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%"   stop-color="#f8f2e2"/>
+            <stop offset="100%" stop-color="#e8dcc6"/>
+          </linearGradient>
+
+          <!-- Crease highlight: thin bright line at fold edges -->
+          <linearGradient id="creaseH" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+
+          <!-- Soft inner shadow below top flap fold -->
+          <linearGradient id="innerShadow" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%"   stop-color="#b8a878" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#b8a878" stop-opacity="0"/>
+          </linearGradient>
+
+          <!-- Wax seal radial gradient -->
+          <radialGradient id="sealGrad" cx="38%" cy="32%" r="60%">
+            <stop offset="0%"   stop-color="#a83a4a"/>
+            <stop offset="100%" stop-color="#4a1520"/>
+          </radialGradient>
+        </defs>
+
+        <!-- ① BASE: full envelope rectangle — ivory paper -->
+        <rect x="0" y="0" width="500" height="309" rx="5" ry="5" fill="url(#paperBase)"/>
+
+        <!-- ② LEFT SIDE FLAP SHADOW (triangle from top-left & bottom-left to center) -->
+        <polygon points="0,0 0,309 250,154" fill="url(#leftFlap)"/>
+
+        <!-- ③ RIGHT SIDE FLAP SHADOW -->
+        <polygon points="500,0 500,309 250,154" fill="url(#rightFlap)"/>
+
+        <!-- ④ BOTTOM FLAP (folds up from bottom center) — slightly warm -->
+        <polygon points="0,309 500,309 250,154" fill="#ede2c4"/>
+        <!-- Bottom flap inner shading — crease near center point -->
+        <polygon points="0,309 500,309 250,154" fill="url(#bottomFlap)"/>
+
+        <!-- ⑤ FOLD LINES: diagonal from corners to center — crisp paper crease -->
+        <!-- Left fold line -->
+        <line x1="0" y1="0"   x2="250" y2="154" stroke="#c4b48c" stroke-width="0.7" opacity="0.6"/>
+        <line x1="0" y1="309" x2="250" y2="154" stroke="#c4b48c" stroke-width="0.7" opacity="0.6"/>
+        <!-- Right fold line -->
+        <line x1="500" y1="0"   x2="250" y2="154" stroke="#c4b48c" stroke-width="0.7" opacity="0.6"/>
+        <line x1="500" y1="309" x2="250" y2="154" stroke="#c4b48c" stroke-width="0.7" opacity="0.6"/>
+
+        <!-- ⑥ TOP FLAP (closed, pointing down) — slightly different ivory tone -->
+        <polygon points="0,0 500,0 250,168" fill="url(#topFlap)"/>
+        <!-- Top flap subtle edge shadow to separate it from body -->
+        <polygon points="0,0 500,0 250,168" fill="url(#innerShadow)" opacity="0.5"/>
+
+        <!-- ⑦ CREASE HIGHLIGHT on top flap fold edge — thin bright line -->
+        <line x1="0" y1="0" x2="250" y2="168" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+        <line x1="500" y1="0" x2="250" y2="168" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+
+        <!-- ⑧ TOP FLAP BOTTOM EDGE — subtle shadow line where flap meets body -->
+        <line x1="0" y1="0" x2="250" y2="168" stroke="#b8a470" stroke-width="0.8" opacity="0.4"/>
+        <line x1="500" y1="0" x2="250" y2="168" stroke="#b8a470" stroke-width="0.8" opacity="0.4"/>
+
+        <!-- ⑨ OUTER BORDER — subtle edge definition -->
+        <rect x="0.5" y="0.5" width="499" height="308" rx="4.5" ry="4.5" fill="none" stroke="#c8b888" stroke-width="0.8" opacity="0.5"/>
+
+        <!-- ⑩ WAX SEAL — centered on flap meeting point -->
+        <g id="svgSeal" style="transition: opacity 0.4s ease;">
+        <circle cx="250" cy="154" r="38" fill="url(#sealGrad)"/>
+        <!-- Seal inner ring -->
+        <circle cx="250" cy="154" r="31" fill="none" stroke="rgba(255,230,200,0.2)" stroke-width="1"/>
+        <!-- Seal highlight -->
+        <ellipse cx="240" cy="144" rx="12" ry="8" fill="rgba(255,255,255,0.12)" transform="rotate(-20,240,144)"/>
+        <!-- Seal monogram -->
+        <text x="250" y="161"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-size="22"
+          font-style="italic"
+          font-weight="400"
+          fill="rgba(255,238,215,0.92)"
+          text-anchor="middle"
+          letter-spacing="-1">M&amp;T</text>
+        </g>
+      </svg>
     </div>
 
   </div><!-- /.env-scene -->
@@ -797,13 +905,31 @@
           <p class="value" style="margin-top:0.5rem">Tenho Juan Saavedra Rautiainen</p>
         </div>
         <div class="detail-card" style="grid-column:1/-1">
-          <p class="label">Lugar</p>
-          <p class="value">Consultar ubicación</p>
-          <p class="sub">Haz clic en el botón para ver la dirección exacta en Google Maps y planear tu llegada con anticipación.</p>
-          <a class="map-btn" href="https://maps.app.goo.gl/epyY4Vkc6UiFmBZk6" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            Ver en Google Maps
-          </a>
+          <p class="label">Ubicación</p>
+
+          <!-- MISA -->
+          <div class="location-block">
+            <p class="venue-tag">⛪ Misa · 4:00 PM</p>
+            <p class="venue-name">Capilla de los Sagrados Corazones</p>
+            <p class="sub" style="margin-top:0.3rem">Tepic, Nayarit. Haz clic para ver la ubicación en Google Maps.</p>
+            <a class="map-btn" href="https://maps.app.goo.gl/p63ge9WCLMDCv8SX9" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Ver en Google Maps
+            </a>
+          </div>
+
+          <div class="venue-divider"></div>
+
+          <!-- FIESTA -->
+          <div class="location-block">
+            <p class="venue-tag">🥂 Brindis & Fiesta · 5:45 PM</p>
+            <p class="venue-name">Ex-Hacienda San Cayetano</p>
+            <p class="sub" style="margin-top:0.3rem">Haz clic para ver la dirección exacta en Google Maps.</p>
+            <a class="map-btn" href="https://maps.app.goo.gl/epyY4Vkc6UiFmBZk6" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Ver en Google Maps
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -824,6 +950,31 @@
         <div class="count-item"><span class="count-number" id="minutes">--</span><span class="count-label">Minutos</span></div>
         <div class="count-dot">·</div>
         <div class="count-item"><span class="count-number" id="seconds">--</span><span class="count-label">Segundos</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <!-- RSVP -->
+  <div class="rsvp-section">
+    <div class="rsvp-inner reveal">
+      <p class="section-label"><span class="ornament"></span> Confirmación <span class="ornament"></span></p>
+      <h2 class="section-title">¿Nos acompañas?</h2>
+      <p class="body-text" style="max-width:480px; margin: 0 auto 2.5rem;">
+        Por favor confirma tu asistencia antes del <strong>10 de abril de 2026</strong>. Tu respuesta nos ayuda a preparar cada detalle para que todo sea perfecto.
+      </p>
+      <!--
+        ★ RSVP FORM ★
+        Cuando tengas tu Google Form listo:
+        1. Abre el formulario → Enviar → ícono < >
+        2. Copia el src del iframe y reemplaza la URL de abajo
+      -->
+      <div class="rsvp-frame-wrap">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSdrElmir_b_sES9V9hpZDTOb1ykNLwr-teNHcLM_8GWUeyj3g/viewform?embedded=true"
+          width="100%" height="700" frameborder="0" marginheight="0" marginwidth="0">
+          Cargando…
+        </iframe>
       </div>
     </div>
   </div>
@@ -859,7 +1010,6 @@
   const scene     = document.getElementById('envScene');
   const prompt    = document.getElementById('envPrompt');
   const cta       = document.getElementById('scrollCta');
-  const seal      = document.getElementById('envSeal');
   const photosRow = document.getElementById('photosRow');
   let opened = false;
 
@@ -872,18 +1022,19 @@
     // Hide prompt
     prompt.classList.add('hide');
 
-    // Step 1: seal shatters
-    seal.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-    seal.style.opacity = '0';
-    seal.style.transform = 'translate(-50%, -50%) scale(0.4) rotate(20deg)';
+    // Step 1: fade out wax seal
+    const svgSeal = document.getElementById('svgSeal');
+    if (svgSeal) svgSeal.style.opacity = '0';
 
-    // Step 2: photos slide up out of envelope
+    // Step 2: photos slide up
     setTimeout(() => {
       photosRow.classList.add('risen');
-    }, 300);
+    }, 350);
 
-    // Step 3: show CTA after photos settle
-    setTimeout(() => cta.classList.add('show'), 1600);
+    // Step 3: show CTA — always runs regardless of seal animation
+    setTimeout(() => {
+      cta.classList.add('show');
+    }, 1600);
   }
 
   /* ── REVEAL MAIN ── */
