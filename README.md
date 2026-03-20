@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Myrna & Tenho — 25.04.2026</title>
+  <title> Myrna & Tenho — 25.04.2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
@@ -12,16 +12,20 @@
     :root {
       --cream: #f2f1ea;
       --warm-white: #f6f5ee;
-      --gold: #7a7d3a;        /* olive — main accent */
-      --gold-light: #a4a760;  /* lighter olive */
-      --dark: #252410;        /* deep olive-black */
-      --brown: #4a4a1e;       /* dark olive for body text */
-      --blush: #e8cdd2;       /* rose blush for photo bg */
-      --env: #d4d5a0;         /* olive envelope body */
-      --env-dark: #b8ba78;    /* deeper olive fold */
-      --env-shadow: #9a9c58;  /* shadow fold */
-      --burgundy: #6e2535;    /* burgundy/wine */
-      --rose: #b8707a;        /* medium rose */
+      --gold: #7a7d3a;
+      --gold-light: #a4a760;
+      --dark: #252410;
+      --brown: #4a4a1e;
+      --blush: #e8cdd2;
+      --env: #d4d5a0;
+      --env-dark: #b8ba78;
+      --env-shadow: #9a9c58;
+      --burgundy: #6e2535;
+      --rose: #b8707a;
+      --text-main: #252410;
+      --text-soft: #4a4a1e;
+      --text-muted: #5f6030;
+      --dark-surface: #23220f;
     }
 
     html { scroll-behavior: smooth; }
@@ -30,7 +34,8 @@
       background: var(--cream);
       color: var(--dark);
       font-family: 'Jost', sans-serif;
-      font-weight: 300;
+      font-weight: 400;
+      line-height: 1.5;
       overflow-x: hidden;
     }
 
@@ -289,7 +294,7 @@
     .pre-title {
       font-weight: 400;
       font-size: 0.72rem;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--brown);
       margin-bottom: 2rem;
@@ -336,9 +341,9 @@
     }
 
     .date-text {
-      font-weight: 200;
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
+      font-weight: 400;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--brown);
     }
@@ -386,8 +391,8 @@
     }
 
     .section-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.3em;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--brown);
       font-weight: 400;
@@ -413,10 +418,10 @@
     }
 
     .body-text {
-      font-size: 0.95rem;
-      line-height: 1.9;
+      font-size: 1rem;
+      line-height: 1.8;
       color: var(--brown);
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .sep {
@@ -448,9 +453,9 @@
     }
 
     .detail-card { border-top: 1px solid rgba(122,125,58,0.4); padding-top: 1.5rem; }
-    .detail-card .label { font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-light); font-weight: 400; margin-bottom: 0.6rem; }
+    .detail-card .label { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light); font-weight: 400; margin-bottom: 0.6rem; }
     .detail-card .value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; font-style: italic; line-height: 1.3; color: var(--cream); }
-    .detail-card .sub { font-size: 0.8rem; color: rgba(240,243,239,0.5); margin-top: 0.4rem; line-height: 1.6; }
+    .detail-card .sub { font-size: 0.8rem; color: rgba(240,243,239,0.72); margin-top: 0.4rem; line-height: 1.6; }
 
     .time-row {
       display: flex;
@@ -469,7 +474,7 @@
     }
     .time-desc {
       font-size: 0.75rem;
-      color: rgba(240,243,239,0.55);
+      color: rgba(240,243,239,0.72);
       line-height: 1.4;
     }
 
@@ -496,8 +501,8 @@
     .location-block:first-of-type { margin-top: 1rem; }
 
     .venue-tag {
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
       font-weight: 400;
@@ -518,6 +523,12 @@
       height: 1px;
       background: rgba(122,125,58,0.25);
       margin: 1.4rem 0;
+    }
+
+    .time-desc {
+      font-size: 0.75rem;
+      color: rgba(240,243,239,0.72);
+      line-height: 1.4;
     }
 
     .countdown-section {
@@ -547,7 +558,7 @@
       min-width: 2ch;
     }
 
-    .count-label { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--brown); font-weight: 400; }
+    .count-label { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brown); font-weight: 400; }
     .count-dot { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--gold-light); align-self: center; line-height: 1; margin-top: -0.5rem; }
 
     .closing { text-align: center; padding: 6rem 2rem 8rem; }
@@ -658,12 +669,101 @@
       75%      { transform: translateY(-2px) rotate(1deg); }
     }
 
+    .scroll-cta button:focus-visible,
+    .map-btn:focus-visible {
+      outline: 2px solid var(--burgundy);
+      outline-offset: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal,
+      .env-intro,
+      .env-scene,
+      .pre-title,
+      .divider-line,
+      .names,
+      .date-block,
+      .scroll-hint,
+      .env-prompt {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.9s ease, transform 0.9s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* ── FLOATING MUSIC BUTTON ── */
+    .music-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 800;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(122,125,58,0.5);
+      background: rgba(246,245,238,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--brown);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(26,22,18,0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .music-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.6s ease, transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 24px rgba(26,22,18,0.22);
+    }
+
+    .music-btn.playing {
+      background: rgba(110,37,53,0.9);
+      border-color: rgba(110,37,53,0.6);
+      color: rgba(246,245,238,0.95);
+    }
+
+    .music-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Pulse ring when playing */
+    .music-btn.playing::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid rgba(110,37,53,0.35);
+      animation: musicPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes musicPulse {
+      0%, 100% { transform: scale(1);   opacity: 0.6; }
+      50%       { transform: scale(1.18); opacity: 0; }
+    }
+
   </style>
 </head>
 <body>
@@ -840,6 +940,26 @@
 ═════════════════════════════════ -->
 <div id="main-content">
 
+  <!-- Floating music toggle — only visible in main content -->
+  <button class="music-btn" id="musicBtn" aria-label="Activar música" title="Música">
+    <span class="music-icon music-icon--off">
+      <!-- Speaker off -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+    </span>
+    <span class="music-icon music-icon--on" style="display:none">
+      <!-- Speaker on with waves -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      </svg>
+    </span>
+  </button>
+
   <!-- HERO -->
   <div class="hero">
     <div class="hero-bg"></div>
@@ -1006,46 +1126,6 @@
 
 
 <script>
-  /* ── ENVELOPE OPEN SEQUENCE ── */
-  const scene     = document.getElementById('envScene');
-  const prompt    = document.getElementById('envPrompt');
-  const cta       = document.getElementById('scrollCta');
-  const photosRow = document.getElementById('photosRow');
-  let opened = false;
-
-  scene.addEventListener('click', openEnvelope);
-
-  function openEnvelope() {
-    if (opened) return;
-    opened = true;
-
-    // Hide prompt
-    prompt.classList.add('hide');
-
-    // Step 1: fade out wax seal
-    const svgSeal = document.getElementById('svgSeal');
-    if (svgSeal) svgSeal.style.opacity = '0';
-
-    // Step 2: photos slide up
-    setTimeout(() => {
-      photosRow.classList.add('risen');
-    }, 350);
-
-    // Step 3: show CTA — always runs regardless of seal animation
-    setTimeout(() => {
-      cta.classList.add('show');
-    }, 1600);
-  }
-
-  /* ── REVEAL MAIN ── */
-  function revealMain() {
-    document.getElementById('envelope-screen').classList.add('hidden');
-    const main = document.getElementById('main-content');
-    main.classList.add('visible');
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-  }
-
   /* ── COUNTDOWN ── */
   function tick() {
     const diff = new Date('2026-04-25T00:00:00') - new Date();
@@ -1055,7 +1135,8 @@
     document.getElementById('minutes').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
     document.getElementById('seconds').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
   }
-  tick(); setInterval(tick, 1000);
+  tick();
+  setInterval(tick, 1000);
 
   /* ── SCROLL REVEAL ── */
   const revealObs = new IntersectionObserver((entries) => {
@@ -1063,6 +1144,130 @@
       if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
     });
   }, { threshold: 0.15 });
+
+  /* ── MUSIC ── */
+  const musicBtn = document.getElementById('musicBtn');
+  const iconOff  = musicBtn.querySelector('.music-icon--off');
+  const iconOn   = musicBtn.querySelector('.music-icon--on');
+
+  let audioCtx       = null;
+  let masterGain     = null;
+  let isPlaying      = false;
+  let musicScheduler = null;
+
+  const chords = [
+    [293.66, 369.99, 440.00],
+    [392.00, 493.88, 587.33],
+    [440.00, 554.37, 659.25],
+    [246.94, 293.66, 369.99],
+    [185.00, 220.00, 277.18],
+    [164.81, 196.00, 246.94],
+  ];
+  const progression = [0, 1, 2, 3, 0, 1, 3, 4, 0, 1, 2, 5];
+  let progIndex = 0;
+
+  function initAudio() {
+    audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = audioCtx.createGain();
+    masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+    masterGain.connect(audioCtx.destination);
+  }
+
+  function playNote(freq, startTime, duration, gainVal) {
+    const osc     = audioCtx.createOscillator();
+    const gNode   = audioCtx.createGain();
+    const vib     = audioCtx.createOscillator();
+    const vibGain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, startTime);
+    vib.frequency.setValueAtTime(5.2, startTime);
+    vibGain.gain.setValueAtTime(freq * 0.004, startTime);
+    vib.connect(vibGain);
+    vibGain.connect(osc.frequency);
+    vib.start(startTime);
+    vib.stop(startTime + duration + 0.5);
+    gNode.gain.setValueAtTime(0, startTime);
+    gNode.gain.linearRampToValueAtTime(gainVal, startTime + 0.6);
+    gNode.gain.setValueAtTime(gainVal, startTime + duration - 0.8);
+    gNode.gain.linearRampToValueAtTime(0, startTime + duration + 0.3);
+    osc.connect(gNode);
+    gNode.connect(masterGain);
+    osc.start(startTime);
+    osc.stop(startTime + duration + 0.4);
+  }
+
+  function scheduleChord() {
+    if (!isPlaying) return;
+    const chord    = chords[progression[progIndex % progression.length]];
+    const now      = audioCtx.currentTime;
+    const duration = 3.2;
+    const spacing  = 0.12;
+    chord.forEach((freq, i) => {
+      playNote(freq / 2, now + i * spacing, duration, 0.055);
+      playNote(freq,     now + i * spacing, duration, 0.08);
+    });
+    progIndex++;
+    musicScheduler = setTimeout(scheduleChord, (duration - 0.4) * 1000);
+  }
+
+  function startMusic() {
+    if (!audioCtx) initAudio();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    isPlaying = true;
+    masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+    masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(0.7, audioCtx.currentTime + 1.5);
+    scheduleChord();
+    musicBtn.classList.add('playing');
+    iconOff.style.display = 'none';
+    iconOn.style.display  = 'flex';
+    musicBtn.setAttribute('aria-label', 'Desactivar música');
+  }
+
+  function stopMusic() {
+    isPlaying = false;
+    clearTimeout(musicScheduler);
+    if (masterGain) {
+      masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+      masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.2);
+    }
+    musicBtn.classList.remove('playing');
+    iconOff.style.display = 'flex';
+    iconOn.style.display  = 'none';
+    musicBtn.setAttribute('aria-label', 'Activar música');
+  }
+
+  musicBtn.addEventListener('click', () => {
+    isPlaying ? stopMusic() : startMusic();
+  });
+
+  /* ── REVEAL MAIN ── */
+  function revealMain() {
+    document.getElementById('envelope-screen').classList.add('hidden');
+    const main = document.getElementById('main-content');
+    main.classList.add('visible');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+    setTimeout(() => musicBtn.classList.add('visible'), 800);
+  }
+
+  /* ── ENVELOPE OPEN SEQUENCE ── */
+  const scene     = document.getElementById('envScene');
+  const prompt    = document.getElementById('envPrompt');
+  const cta       = document.getElementById('scrollCta');
+  const photosRow = document.getElementById('photosRow');
+  let opened = false;
+
+  scene.addEventListener('click', function() {
+    if (opened) return;
+    opened = true;
+    prompt.classList.add('hide');
+    const svgSeal = document.getElementById('svgSeal');
+    if (svgSeal) svgSeal.style.opacity = '0';
+    setTimeout(() => photosRow.classList.add('risen'), 350);
+    setTimeout(() => cta.classList.add('show'), 1600);
+  });
 </script>
 </body>
 </html>
