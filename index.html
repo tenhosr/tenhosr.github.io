@@ -3,12 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tenho's Website</title>
+  <title>Tenho Saavedra</title>
+  <meta name="description" content="Tenho Saavedra – CV and notes on AI, analysis and recommendations.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Notes on the go</h1>
-  <p>Some type of memoir, blog, notepad.</p>
- <h2>Notes on AI</h2>
-  <p>This is a test to format, work on separate issues in my html coding, and learning creating new sites.</p>
+  <header class="site-header">
+    <a class="site-name" href="index.html">Tenho Saavedra</a>
+    <nav>
+      <a href="#cv">CV</a>
+      <a href="#notes">Notes</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>Tenho Saavedra</h1>
+      <p class="lead">Notes on the go: analysis, articles and recommendations.</p>
+      <p class="links">
+        <a href="https://github.com/tenhosr">GitHub</a>
+      </p>
+    </section>
+
+    <section id="cv">
+      <h2>CV</h2>
+
+      <h3>Experience</h3>
+      <ul class="entries">
+        <li>
+          <span class="when">20XX – now</span>
+          <div>
+            <strong>Your role</strong> · Company
+            <p>One line about what you do there.</p>
+          </div>
+        </li>
+      </ul>
+
+      <h3>Education</h3>
+      <ul class="entries">
+        <li>
+          <span class="when">20XX</span>
+          <div>
+            <strong>Degree</strong> · School
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="notes">
+      <h2>Notes</h2>
+      <!-- Newest first. To add a note: copy notes/_template.html, then add a line here. -->
+      <ul class="post-list">
+        <li>
+          <time datetime="2026-10-24">24 Oct 2026</time>
+          <a href="notes/notes-on-ai.html">Notes on AI</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Tenho Saavedra</p>
+  </footer>
 </body>
 </html>
