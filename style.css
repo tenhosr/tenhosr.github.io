@@ -6,14 +6,23 @@
   --border: #e7e5e4;
 }
 
+/* Dark colors: follow the system setting unless the visitor picked light */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #1c1917;
     --text: #e7e5e4;
     --muted: #a8a29e;
     --accent: #60a5fa;
     --border: #44403c;
   }
+}
+
+:root[data-theme="dark"] {
+  --bg: #1c1917;
+  --text: #e7e5e4;
+  --muted: #a8a29e;
+  --accent: #60a5fa;
+  --border: #44403c;
 }
 
 * {
@@ -49,9 +58,31 @@ a {
   text-decoration: none;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+}
+
 nav a {
   margin-left: 16px;
   text-decoration: none;
+}
+
+#theme-toggle {
+  margin-left: 16px;
+  width: 36px;
+  height: 36px;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--text);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#theme-toggle:hover {
+  border-color: var(--muted);
 }
 
 h1 {
